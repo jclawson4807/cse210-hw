@@ -39,7 +39,17 @@ class Program
 
             numberOfGuesses += 1;
 
-            int guessInt = int.Parse(guessString);
+            int guessInt = 0;
+
+            try
+            {
+                guessInt = int.Parse(guessString);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("You must enter an integer value.");
+                break;
+            }
 
             if (guessInt == magicInt)
             {
@@ -49,7 +59,14 @@ class Program
                 }
 
                 Console.WriteLine($"You guessed it!  It took you {numberOfGuesses} turn{pluralityString}. ");
-                doContinue = false;
+
+                Console.Write("Do you want to play again? (Y or N) ");
+                string playAgainResponseString = Console.ReadLine();
+
+                if (playAgainResponseString == "N")
+                {
+                    doContinue = false;
+                }
             }
             else if (guessInt > magicInt)
             {
