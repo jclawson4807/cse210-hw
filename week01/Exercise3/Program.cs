@@ -7,23 +7,29 @@ class Program
         Console.Write("What is the magic number? ");
         string magicNumberString = Console.ReadLine();
 
-        Console.Write("What is your guess? ");
-        string guessString = Console.ReadLine();
+        bool doContinue = true;
 
-        int magicInt = int.Parse(magicNumberString);
-        int guessInt = int.Parse(guessString);
+        while (doContinue)
+        {
+            Console.Write("What is your guess? ");
+            string guessString = Console.ReadLine();
 
-        if (guessInt == magicInt)
-        {
-            Console.WriteLine("You guessed it!");
-        }
-        else if (guessInt > magicInt)
-        {
-            Console.WriteLine("Lower");
-        }
-        else
-        {
-            Console.WriteLine("Higher");     
+            int magicInt = int.Parse(magicNumberString);
+            int guessInt = int.Parse(guessString);
+
+            if (guessInt == magicInt)
+            {
+                Console.WriteLine("You guessed it!");
+                doContinue = false;
+            }
+            else if (guessInt > magicInt)
+            {
+                Console.WriteLine("Lower");
+            }
+            else
+            {
+                Console.WriteLine("Higher");     
+            }
         }
     }
 }
