@@ -2,18 +2,6 @@ using System;
 
 class Program
 {
-
-    /*
-    For this assignment, write a C# program that has several simple functions:
-
-    
-    
-    
-    
-    
-    Your Main function should then call each of these functions saving the return values and passing data to them as necessary.
-    */
-
     // DisplayWelcome - Displays the message, "Welcome to the Program!"
     static void DisplayWelcome()
     {
@@ -23,7 +11,7 @@ class Program
     // PromptUserName - Asks for and returns the user's name (as a string)
     static string PromptUserName()
     {
-        Console.WriteLine("Please enter your name: ");
+        Console.Write("Please enter your name: ");
         string name = Console.ReadLine();
 
         return name;
@@ -32,7 +20,7 @@ class Program
     // PromptUserNumber - Asks for and returns the user's favorite number (as an integer)
     static int PromptUserNumber()
     {
-        Console.WriteLine("Please enter your favorite number: ");
+        Console.Write("Please enter your favorite number: ");
         string favoriteNumberString = Console.ReadLine();
 
         try
@@ -62,6 +50,11 @@ class Program
 
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Exercise4 Project.");
+        // Your Main function should then call each of these functions saving the return values and passing data to them as necessary.
+        DisplayWelcome();
+        string userName = PromptUserName();
+        int userNumber = PromptUserNumber();
+        int squaredNumber = SquareNumber(userNumber);
+        DisplayResult(userName, squaredNumber);
     }
 }
