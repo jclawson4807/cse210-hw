@@ -69,5 +69,16 @@ class Program
         Console.WriteLine($"The sum is: {sumOfNumbers}");
         Console.WriteLine($"The average is: {averageNumber}");
         Console.WriteLine($"The largest number is: {largestNumber}");
+
+
+        // Sort the numbers in the list and display the new, sorted list
+        userNumbers.Sort();
+
+        Console.WriteLine("The sorted list is:");
+
+        foreach (int number in userNumbers)
+        {
+            Console.WriteLine(number);
+        }
     }
 }
