@@ -25,7 +25,7 @@ class Program
 
         int largestNumber = 0;
         int smallestNumber = 0;
-        int sumOfNumbers = 0;
+        float sumOfNumbers = 0;
 
         while (doContinue)
         {
@@ -63,6 +63,11 @@ class Program
             }
         }
 
+        int listCount = userNumbers.Count;
+        float averageNumber = sumOfNumbers / (float)listCount;
 
+        Console.WriteLine($"The sum is: {sumOfNumbers}");
+        Console.WriteLine($"The average is: {averageNumber}");
+        Console.WriteLine($"The largest number is: {largestNumber}");
     }
 }
