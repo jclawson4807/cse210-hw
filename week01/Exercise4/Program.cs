@@ -10,7 +10,7 @@ class Program
     
     
     
-    DisplayResult - Accepts the user's name and the squared number and displays them.
+    
     Your Main function should then call each of these functions saving the return values and passing data to them as necessary.
     */
 
@@ -52,6 +52,12 @@ class Program
     {
         int squaredValue = valueToSquare * valueToSquare;
         return squaredValue;
+    }
+
+    // DisplayResult - Accepts the user's name and the squared number and displays them.
+    static void DisplayResult(string usersName, int squaredValue)
+    {
+        Console.WriteLine($"{usersName}, the square of your number is {squaredValue}");
     }
 
     static void Main(string[] args)
