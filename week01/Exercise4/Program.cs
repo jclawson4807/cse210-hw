@@ -23,6 +23,10 @@ class Program
 
         Console.WriteLine("Enter a list of numbers, type 0 when finished");
 
+        int largestNumber = 0;
+        int smallestNumber = 0;
+        int sumOfNumbers = 0;
+
         while (doContinue)
         {
             Console.Write("Enter number: ");
@@ -36,8 +40,21 @@ class Program
                 {
                     doContinue = false;     
                 }
-                else{
+                else
+                {
                     userNumbers.Add(userNumberInt);
+
+                    sumOfNumbers += userNumberInt;
+
+                    if (userNumberInt > largestNumber)
+                    {
+                        largestNumber = userNumberInt;
+                    }
+                    else if (userNumberInt > 0 && (smallestNumber == 0 || (userNumberInt < smallestNumber)))
+                    {
+                        // Have the user enter both positive and negative numbers, then find the smallest positive number (the positive number that is closest to zero).
+                        smallestNumber = userNumberInt;
+                    }
                 }
             }
             catch (Exception e)
@@ -46,6 +63,6 @@ class Program
             }
         }
 
-        
+
     }
 }
