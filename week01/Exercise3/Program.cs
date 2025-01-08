@@ -60,10 +60,10 @@ class Program
 
                 Console.WriteLine($"You guessed it!  It took you {numberOfGuesses} turn{pluralityString}. ");
 
-                Console.Write("Do you want to play again? (Y or N) ");
-                string playAgainResponseString = Console.ReadLine();
+                Console.Write("Do you want to play again? (yes or no) ");
+                string playAgainResponseString = Console.ReadLine().ToUpper();
 
-                if (playAgainResponseString == "N")
+                if (playAgainResponseString != "YES")
                 {
                     doContinue = false;
                 }
