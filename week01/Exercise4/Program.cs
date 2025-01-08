@@ -17,6 +17,35 @@ class Program
 
     static void Main(string[] args)
     {
+        List<int> userNumbers = new List<int>();
+
+        bool doContinue = true;
+
+        Console.WriteLine("Enter a list of numbers, type 0 when finished");
+
+        while (doContinue)
+        {
+            Console.Write("Enter number: ");
+            string userNumberString = Console.ReadLine();
+
+            try
+            {
+                int userNumberInt = int.Parse(userNumberString);
+
+                if (userNumberInt == 0)
+                {
+                    doContinue = false;     
+                }
+                else{
+                    userNumbers.Add(userNumberInt);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("You must enter an integer value.");
+            }
+        }
+
         
     }
 }
