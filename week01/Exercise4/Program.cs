@@ -8,7 +8,7 @@ class Program
 
     
     
-    PromptUserNumber - Asks for and returns the user's favorite number (as an integer)
+    
     SquareNumber - Accepts an integer as a parameter and returns that number squared (as an integer)
     DisplayResult - Accepts the user's name and the squared number and displays them.
     Your Main function should then call each of these functions saving the return values and passing data to them as necessary.
@@ -27,6 +27,24 @@ class Program
         string name = Console.ReadLine();
 
         return name;
+    }
+
+    // PromptUserNumber - Asks for and returns the user's favorite number (as an integer)
+    static int PromptUserNumber()
+    {
+        Console.WriteLine("Please enter your favorite number: ");
+        string favoriteNumberString = Console.ReadLine();
+
+        try
+        {
+            int favoriteNumberInt = int.Parse(favoriteNumberString);
+            return favoriteNumberInt;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("You must enter an integer value.");
+            throw;
+        }
     }
 
     static void Main(string[] args)
