@@ -1,60 +1,22 @@
 using System;
+using System.Collections.Generic;
 
 class Program
 {
-    // DisplayWelcome - Displays the message, "Welcome to the Program!"
-    static void DisplayWelcome()
-    {
-        Console.WriteLine("Welcome to the Program!");
-    }
+    // Ask the user for a series of numbers, and append each one to a list. Stop when they enter 0. (Remember: You should not add 0 to the list. If you do, later calculations and operations will not be correct.)
 
-    // PromptUserName - Asks for and returns the user's name (as a string)
-    static string PromptUserName()
-    {
-        Console.Write("Please enter your name: ");
-        string name = Console.ReadLine();
+    // Once you have a list, have your program do the following:
 
-        return name;
-    }
+    // Core Requirements
 
-    // PromptUserNumber - Asks for and returns the user's favorite number (as an integer)
-    static int PromptUserNumber()
-    {
-        Console.Write("Please enter your favorite number: ");
-        string favoriteNumberString = Console.ReadLine();
+    // Work through these core requirements step-by-step to complete the program. Please don't skip ahead and do the whole thing at once, because others on your team may benefit from building the program up slowly.
 
-        try
-        {
-            int favoriteNumberInt = int.Parse(favoriteNumberString);
-            return favoriteNumberInt;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("You must enter an integer value.");
-            throw;
-        }
-    }
-
-    // SquareNumber - Accepts an integer as a parameter and returns that number squared (as an integer)
-    static int SquareNumber(int valueToSquare)
-    {
-        int squaredValue = valueToSquare * valueToSquare;
-        return squaredValue;
-    }
-
-    // DisplayResult - Accepts the user's name and the squared number and displays them.
-    static void DisplayResult(string usersName, int squaredValue)
-    {
-        Console.WriteLine($"{usersName}, the square of your number is {squaredValue}");
-    }
+    // Compute the sum, or total, of the numbers in the list.
+    // Compute the average of the numbers in the list.
+    // Find the maximum, or largest, number in the list.
 
     static void Main(string[] args)
     {
-        // Your Main function should then call each of these functions saving the return values and passing data to them as necessary.
-        DisplayWelcome();
-        string userName = PromptUserName();
-        int userNumber = PromptUserNumber();
-        int squaredNumber = SquareNumber(userNumber);
-        DisplayResult(userName, squaredNumber);
+        
     }
 }
