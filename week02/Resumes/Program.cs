@@ -23,5 +23,13 @@ class Program
 
         resume.Display();
 
+        AbstractionExample abstractionExample = new AbstractionExample();
+        abstractionExample.Calculate(100);
+        abstractionExample.DisplayFibonacciSequence();
+
+        List<int> fibonacciValue = abstractionExample.GetFibonacciValueList();
+
+        Console.WriteLine($"Count {fibonacciValue.Count}")
+;
     }
 }
