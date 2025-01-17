@@ -32,13 +32,15 @@ class Program
 
         string menuOptionString = Console.ReadLine();
 
+        int returnValue = 0;
+
         try
         {
             int menuOptionInt = int.Parse(menuOptionString);
 
             if (menuOptionInt == 1)
             {
-                journal.DisplayJournalEditor(promptOptions.GetRandomPrompt(), promptOptions);   
+                returnValue = journal.DisplayJournalEditor(promptOptions.GetRandomPrompt(), promptOptions);  
             }
             else if (menuOptionInt == 2)
             {
@@ -58,11 +60,11 @@ class Program
             }
             else if (menuOptionInt == 6)
             {
-                journal.DisplaySaveJournalMenu();   
+                returnValue = journal.DisplaySaveJournalMenu();  
             }
             else if (menuOptionInt == 7)
             {
-                journal.DisplayLoadJournalMenu();   
+                returnValue = journal.DisplayLoadJournalMenu();  
             }
             else if (menuOptionInt == 8)
             {
@@ -77,6 +79,11 @@ class Program
 
                 DisplayPrimaryMenu();    
             }
+
+            if (returnValue == 0)
+            {
+                DisplayPrimaryMenu();    
+            }  
         }
         catch (Exception e)
         {
