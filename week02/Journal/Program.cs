@@ -9,13 +9,8 @@ class Program
 
     static void Main(string[] args)
     {
-        // TODO - try to load prompt options list - if file is not found - populate default list
+        // if a custom prompt list has been stored, this code loads that list.  If not, the default prompts are added.
         promptOptions.LoadPromptList();
-
-        if (promptOptions._promptList.Count == 0)
-        {
-            promptOptions.PopulateDefaultPromptList();
-        }
 
         DisplayPrimaryMenu();
     }

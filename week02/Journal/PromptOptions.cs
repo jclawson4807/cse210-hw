@@ -233,14 +233,21 @@ public class PromptOptions
 
     public void LoadPromptList()
     {
-        string loadedPersonFile = File.ReadAllText(promptFileName);
+        if (File.Exists(promptFileName))
+        {
+            string loadedPersonFile = File.ReadAllText(promptFileName);
 
-        Console.WriteLine(loadedPersonFile);
+            Console.WriteLine(loadedPersonFile);
 
-        var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
-        var promptList = JsonSerializer.Deserialize<List<string>>(loadedPersonFile,  options);
+            var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+            var promptList = JsonSerializer.Deserialize<List<string>>(loadedPersonFile,  options);
 
-        _promptList = promptList;
+            _promptList = promptList;
+        }
+        else
+        {
+            PopulateDefaultPromptList();
+        }
     }
 
 	public async void WritePromptList()
