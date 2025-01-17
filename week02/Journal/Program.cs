@@ -56,7 +56,7 @@ class Program
             }
             else if (menuOptionInt == 5)
             {
-                promptOptions.DisplayPromptEditorMenu();   
+                returnValue = promptOptions.DisplayPromptEditorMenu();   
             }
             else if (menuOptionInt == 6)
             {

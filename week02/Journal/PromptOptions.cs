@@ -8,7 +8,7 @@ public class PromptOptions
 
     public List<string> _promptList = new List<string>();
 
-    public void DisplayPromptEditorMenu(bool clearConsole = true)
+    public int DisplayPromptEditorMenu(bool clearConsole = true)
     {
         if (clearConsole)
         {
@@ -31,6 +31,8 @@ public class PromptOptions
 
         string menuOptionString = Console.ReadLine();
 
+        int returnValue = 0;
+
         try
         {
             int menuOptionInt = int.Parse(menuOptionString);
@@ -41,7 +43,7 @@ public class PromptOptions
             }
             else if (menuOptionInt == 2)
             {
-                DisplayAddPromptMenu();    
+                returnValue = DisplayAddPromptMenu();    
             }
             else if (menuOptionInt == 3)
             {
@@ -53,7 +55,7 @@ public class PromptOptions
             }
             else if (menuOptionInt == 5)
             {
-                // @TASK - figure out how to call parent class and call primary display    
+                return 0;   
             }
             else
             {
@@ -61,7 +63,7 @@ public class PromptOptions
 
                 Thread.Sleep(sleepInMilliseconds);
 
-                DisplayPromptEditorMenu();    
+                return DisplayPromptEditorMenu();    
             }
         }
         catch (Exception e)
@@ -70,8 +72,10 @@ public class PromptOptions
 
             Thread.Sleep(sleepInMilliseconds);
 
-            DisplayPromptEditorMenu();
+            return DisplayPromptEditorMenu();
         }
+
+        return returnValue;
     }
 
     public void DisplayNumberedPrompts()
@@ -96,9 +100,16 @@ public class PromptOptions
         DisplayPromptEditorMenu(false);
     }
 
-    public void DisplayAddPromptMenu()
+    public int DisplayAddPromptMenu()
     {
-        
+        Console.Clear();
+        Console.WriteLine("Add Prompt\n"); // add a new line before this text - and add an extra new line after the text
+
+        Console.Write("Enter the text of the new prompt: ");
+ 
+        string prompt_response = Console.ReadLine();
+
+        return AddNewPrompt(prompt_response);     
     }
 
     public void DisplayDeletePromptMenu()
@@ -124,7 +135,7 @@ public class PromptOptions
         Console.WriteLine($"Error: Index {promptIndex} is out of bounds.");    
     }
 
-    public void AddNewPrompt(string newPrompt)
+    public int AddNewPrompt(string newPrompt)
     {
         // First, find out if the prompt already exists in the prompt list
         int itemIndex = _promptList.IndexOf(newPrompt);
@@ -133,6 +144,20 @@ public class PromptOptions
         {
             // the new prompt does not exist in the prompt list - add it
             _promptList.Add(newPrompt);
+
+            Console.WriteLine("\nNew Prompt Added.\n");
+
+            Thread.Sleep(sleepInMilliseconds);
+
+            return DisplayPromptEditorMenu();
+        }
+        else
+        {
+            Console.WriteLine("\nThat prompt text is already in the prompt list.  Please try again.\n");
+
+            Thread.Sleep(sleepInMilliseconds);
+
+            return DisplayAddPromptMenu();
         }
     }
 
