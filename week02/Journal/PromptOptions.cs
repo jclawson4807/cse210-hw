@@ -2,6 +2,8 @@ using System;
 
 public class PromptOptions
 {
+    Random random = new Random();
+
     public List<string> _promptList = new List<string>();
 
     public void DisplayPromptEditorMenu()
@@ -64,7 +66,8 @@ public class PromptOptions
 
     public string GetRandomPrompt()
     {
-        return "";
+        int randomIndex = random.Next(_promptList.Count);
+        return _promptList[randomIndex];
     }
 
     public void PopulateDefaultPromptList()
