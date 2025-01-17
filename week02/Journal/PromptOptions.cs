@@ -13,9 +13,18 @@ public class PromptOptions
 
     public void DisplayNumberedPrompts()
     {
+        int index = 0;
+        string spacer = "";
+
         foreach (string prompt in _promptList)
-        {
-            Console.WriteLine(prompt);
+        {   
+            Console.WriteLine($"{spacer}{index}: {prompt}");
+            index += 1;
+
+            if (index > 9)
+            {
+                spacer = " ";    
+            }
         }
     }
 
