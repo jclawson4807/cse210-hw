@@ -250,13 +250,12 @@ public class PromptOptions
         }
     }
 
-	public async void WritePromptList()
+	public void WritePromptList()
     {
         // JSON write code from https://code-maze.com/introduction-system-text-json-examples/
 
-        using var stream = File.Create(promptFileName);
-        await JsonSerializer.SerializeAsync(stream, _promptList);
-        await stream.DisposeAsync();
+        string jsonSerializedPrompt = JsonSerializer.Serialize(_promptList);
+        File.WriteAllText(promptFileName, jsonSerializedPrompt);
 
         Console.WriteLine("\nPrompt data written to file.\n");
 
@@ -264,4 +263,19 @@ public class PromptOptions
 
         DisplayPromptEditorMenu();
     }
+
+    // public async void WritePromptList()
+    // {
+    //     // JSON write code from https://code-maze.com/introduction-system-text-json-examples/
+
+    //     using var stream = File.Create(promptFileName);
+    //     await JsonSerializer.SerializeAsync(stream, _promptList);
+    //     await stream.DisposeAsync();
+
+    //     Console.WriteLine("\nPrompt data written to file.\n");
+
+    //     Thread.Sleep(sleepInMilliseconds);
+
+    //     DisplayPromptEditorMenu();
+    // }
 }
