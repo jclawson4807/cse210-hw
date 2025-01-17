@@ -38,7 +38,7 @@ class Program
 
             if (menuOptionInt == 1)
             {
-                journal.DisplayJournalEditor(-1);   
+                journal.DisplayJournalEditor(promptOptions.GetRandomPrompt(), promptOptions);   
             }
             else if (menuOptionInt == 2)
             {
