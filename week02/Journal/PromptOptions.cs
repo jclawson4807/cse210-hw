@@ -1,5 +1,7 @@
 using System;
 using System.Net.Security;
+using System.IO;
+using System.Text.Json;
 
 public class PromptOptions
 {
@@ -7,6 +9,8 @@ public class PromptOptions
     int sleepInMilliseconds = 2000;
 
     public List<string> _promptList = new List<string>();
+
+    string promptFileName = "prompts.json";
 
     public int DisplayPromptEditorMenu(bool clearConsole = true)
     {
@@ -232,8 +236,16 @@ public class PromptOptions
 
     }
 
-	public void WritePromptList()
+	public async void WritePromptList()
     {
+        using var stream = File.Create(promptFileName);
+        await JsonSerializer.SerializeAsync(stream, _promptList);
+        await stream.DisposeAsync();
 
+        Console.WriteLine("\nPrompt data written to file.\n");
+
+        Thread.Sleep(sleepInMilliseconds);
+
+        DisplayPromptEditorMenu();
     }
 }
