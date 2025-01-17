@@ -66,7 +66,7 @@ class Program
             }
             else if (menuOptionInt == 8)
             {
-                // @TODO Display quit message  
+                Console.WriteLine("Quitting Journal Program.  Good Bye.");
                 System.Environment.Exit(1); 
             }
             else
