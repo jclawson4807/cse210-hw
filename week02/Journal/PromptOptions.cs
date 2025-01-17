@@ -8,9 +8,17 @@ public class PromptOptions
 
     public List<string> _promptList = new List<string>();
 
-    public void DisplayPromptEditorMenu()
+    public void DisplayPromptEditorMenu(bool clearConsole = true)
     {
-        Console.Clear();
+        if (clearConsole)
+        {
+            Console.Clear();
+        }
+        else
+        {
+            Console.WriteLine("");
+        }
+
         Console.WriteLine("Prompt Editor\n"); // add a new line before this text - and add an extra new line after the text
 
         Console.WriteLine("1. Display prompt list");
@@ -84,11 +92,13 @@ public class PromptOptions
                 spacer = " ";    
             }
         }
+
+        DisplayPromptEditorMenu(false);
     }
 
     public void DisplayAddPromptMenu()
     {
-
+        
     }
 
     public void DisplayDeletePromptMenu()
