@@ -72,6 +72,11 @@ public class PromptOptions
 
     public void PopulateDefaultPromptList()
     {
+        _promptList.Add("If I had one thing I could do over today, what would it be?");
+        _promptList.Add("What was the best part of my day?");
+        _promptList.Add("What was the kindest thing that someone said to you today?");
+        _promptList.Add("What did you learn in your personal scripture study today?");
+        _promptList.Add("How did you see the hand of the Lord in your life today?");
 
     }
 
