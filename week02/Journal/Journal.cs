@@ -34,12 +34,43 @@ public class Journal
 
     public int SaveJournal(string filename)
     {
+        string jsonSerializedJournal = JsonSerializer.Serialize(_journalEntryList);
+        File.WriteAllText(filename, jsonSerializedJournal);
+
+        Console.WriteLine("\nJournal data written to file.\n");
+
+        Thread.Sleep(sleepInMilliseconds);
+
         return 0;    
     }
 
     public int LoadJournal(string filename)
     {
-        return 0;    
+        if (File.Exists(filename))
+        {
+            string loadedJournalJsonString = File.ReadAllText(filename);
+
+            Console.WriteLine(loadedJournalJsonString);
+
+            var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+            var journalData = JsonSerializer.Deserialize<List<JournalEntry>>(loadedJournalJsonString, options);
+
+            _journalEntryList = journalData;
+
+            Console.WriteLine("Loaded Journal Data");
+
+            Thread.Sleep(sleepInMilliseconds);
+
+            return 0;
+        }
+        else
+        {
+            Console.WriteLine($"\nError: No file found for filename {filename}.");
+
+            Thread.Sleep(sleepInMilliseconds);
+
+            return DisplayLoadJournalMenu();
+        }    
     }
 
     public void DisplaySortedJournalEntries(int sort_type)
