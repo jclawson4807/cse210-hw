@@ -233,11 +233,26 @@ public class PromptOptions
 
     public void LoadPromptList()
     {
+        string loadedPersonFile = File.ReadAllText(promptFileName);
 
+        Console.WriteLine(loadedPersonFile);
+
+        var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        var promptList = JsonSerializer.Deserialize<List<string>>(loadedPersonFile,  options);
+
+        _promptList = promptList;
+
+        Console.WriteLine("\nPrompt data read from file.\n");
+
+        Thread.Sleep(sleepInMilliseconds);
+
+        DisplayPromptEditorMenu();
     }
 
 	public async void WritePromptList()
     {
+        // JSON write code from https://code-maze.com/introduction-system-text-json-examples/
+
         using var stream = File.Create(promptFileName);
         await JsonSerializer.SerializeAsync(stream, _promptList);
         await stream.DisposeAsync();
