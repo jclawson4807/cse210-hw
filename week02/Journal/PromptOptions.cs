@@ -47,7 +47,9 @@ public class PromptOptions
             }
             else if (menuOptionInt == 3)
             {
-                DisplayDeletePromptMenu();    
+                returnValue = DisplayDeletePromptMenu();
+
+                return DisplayPromptEditorMenu(true);  
             }
             else if (menuOptionInt == 4)
             {
@@ -78,7 +80,7 @@ public class PromptOptions
         return returnValue;
     }
 
-    public void DisplayNumberedPrompts()
+    public void DisplayNumberedPrompts(bool displayPromptEditorMenu = true)
     {
         Console.Clear();
         Console.WriteLine("Prompts:\n");
@@ -97,7 +99,10 @@ public class PromptOptions
             }
         }
 
-        DisplayPromptEditorMenu(false);
+        if (displayPromptEditorMenu)
+        {
+            DisplayPromptEditorMenu(false);
+        }
     }
 
     public int DisplayAddPromptMenu()
@@ -112,27 +117,59 @@ public class PromptOptions
         return AddNewPrompt(prompt_response);     
     }
 
-    public void DisplayDeletePromptMenu()
+    public int DisplayDeletePromptMenu()
     {
-        
+        Console.Clear();
+
+        Console.WriteLine("Delete Prompt\n"); // add a new line before this text - and add an extra new line after the text
+
+        DisplayNumberedPrompts(false);
+
+        Console.Write("Enter the number of the prompt you wish to delete: ");
+ 
+        string promptNumberString = Console.ReadLine();
+
+        try
+        {
+            int promptIndex = int.Parse(promptNumberString);
+
+            return DeletePromptByIndex(promptIndex);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: You must enter a valid integer.");
+
+            Thread.Sleep(sleepInMilliseconds);
+
+            return DisplayDeletePromptMenu();
+        }
     }
 
-    public void DeletePromptByIndex(int promptIndex)
+    public int DeletePromptByIndex(int promptIndex)
     {
         // make sure that the promptIndex provided is within the range of the promptList
         if (promptIndex > 0 && promptIndex < _promptList.Count)
         {
             _promptList.RemoveAt(promptIndex);
+
+            Console.WriteLine($"\nPrompt at index {promptIndex} removed.");
+            
+            Thread.Sleep(sleepInMilliseconds);
+
+            return 0;
         }
         else
         {
-            DisplayPromptIndexOutOfRangeError(promptIndex);
+            return DisplayPromptIndexOutOfRangeError(promptIndex);
         }         
     }
 
-    public void DisplayPromptIndexOutOfRangeError(int promptIndex)
+    public int DisplayPromptIndexOutOfRangeError(int promptIndex)
     {
-        Console.WriteLine($"Error: Index {promptIndex} is out of bounds.");    
+        Console.WriteLine($"Error: Index {promptIndex} is out of bounds.");
+        Thread.Sleep(sleepInMilliseconds);
+
+        return 1;    
     }
 
     public int AddNewPrompt(string newPrompt)
