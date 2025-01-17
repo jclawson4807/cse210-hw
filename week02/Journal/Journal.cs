@@ -4,6 +4,8 @@ using System.Text.Json;
 
 public class Journal
 {
+
+    int sleepInMilliseconds = 2000;
     public List<JournalEntry> _journalEntryList = new List<JournalEntry>();
 
     public void DisplaySaveJournalMenu()
@@ -41,16 +43,69 @@ public class Journal
         }
     }
 
-    public void DisplayJournalEditor(int promptIndex)
+    public void DisplayJournalEditor(string prompt, PromptOptions promptOptions)
     {
-        // note if promptIndex == -1 display random prompt
+        Console.Clear();
+        Console.WriteLine("Create a Journal Entry\n"); // add a new line before this text - and add an extra new line after the text
 
+        Console.WriteLine(prompt);
+        Console.Write("> ");
+ 
+        string prompt_response = Console.ReadLine();
 
+        DisplayJournalOptionsMenu(prompt, prompt_response, promptOptions);
     }
 
-    public void DisplayJournalOptionsMenu()
+    public void DisplayJournalOptionsMenu(string prompt, string prompt_response, PromptOptions promptOptions)
     {
-        
+        Console.WriteLine("\nJournal Editor\n"); // add a new line before this text - and add an extra new line after the text
+
+        Console.WriteLine("1. Keep Journal Entry");
+        Console.WriteLine("2. New Prompt");
+        Console.WriteLine("3. New Entry With The Same Prompt");
+        Console.WriteLine("4. Return to menu\n");
+
+        Console.Write("Select a menu option: ");
+
+        string menuOptionString = Console.ReadLine();
+
+        try
+        {
+            int menuOptionInt = int.Parse(menuOptionString);
+
+            if (menuOptionInt == 1)
+            {
+                AddNewJournalEntry(prompt, prompt_response);
+            }
+            else if (menuOptionInt == 2)
+            {
+                DisplayJournalEditor(promptOptions.GetRandomPrompt(), promptOptions);    
+            }
+            else if (menuOptionInt == 3)
+            {
+                DisplayJournalEditor(prompt, promptOptions);    
+            }
+            else if (menuOptionInt == 4)
+            {
+                // @TASK - figure out how to call parent class and call primary display      
+            }
+            else
+            {
+                Console.WriteLine("Error: You must enter an integer value from 1 to 4.");
+
+                Thread.Sleep(sleepInMilliseconds);
+
+                DisplayJournalOptionsMenu(prompt, prompt_response, promptOptions);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: You must enter an integer value from 1 to 5.");
+
+            Thread.Sleep(sleepInMilliseconds);
+
+            DisplayJournalOptionsMenu(prompt, prompt_response, promptOptions);
+        }
     }
 
     public void AddNewJournalEntry(string prompt, string journalEntryText)
@@ -61,20 +116,5 @@ public class Journal
         journalEntry._journalEntryTimeStamp = DateTime.Now;
 
         _journalEntryList.Add(journalEntry);
-    }
-
-    public void LoadPromptList()
-    {
-        // string jsonText = File.ReadAllText(@"./prompts.json");
-        // var promptOptions = JsonSerializer.Deserialize<PromptOptions>(jsonText);
-
-        // _promptOptions = promptOptions;
-    }
-
-    public void WritePromptList()
-    {
-        // string fileName = "prompts.json";
-        // string jsonText = JsonSerializer.Serialize(_promptOptions);
-        // File.WriteAllText(fileName, jsonText);
     }
 }
