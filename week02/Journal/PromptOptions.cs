@@ -4,16 +4,73 @@ using System.Net.Security;
 public class PromptOptions
 {
     Random random = new Random();
+    int sleepInMilliseconds = 2000;
 
     public List<string> _promptList = new List<string>();
 
     public void DisplayPromptEditorMenu()
     {
+        Console.Clear();
+        Console.WriteLine("Prompt Editor\n"); // add a new line before this text - and add an extra new line after the text
 
+        Console.WriteLine("1. Display prompt list");
+        Console.WriteLine("2. Add new prompt");
+        Console.WriteLine("3. Delete prompt");
+        Console.WriteLine("4. Save prompt list");
+        Console.WriteLine("5. Return to menu\n");
+
+        Console.Write("Select a menu option: ");
+
+        string menuOptionString = Console.ReadLine();
+
+        try
+        {
+            int menuOptionInt = int.Parse(menuOptionString);
+
+            if (menuOptionInt == 1)
+            {
+                DisplayNumberedPrompts();    
+            }
+            else if (menuOptionInt == 2)
+            {
+                DisplayAddPromptMenu();    
+            }
+            else if (menuOptionInt == 3)
+            {
+                DisplayDeletePromptMenu();    
+            }
+            else if (menuOptionInt == 4)
+            {
+                WritePromptList();    
+            }
+            else if (menuOptionInt == 5)
+            {
+                // @TASK - figure out how to call parent class and call primary display    
+            }
+            else
+            {
+                Console.WriteLine("Error: You must enter an integer value from 1 to 5.");
+
+                Thread.Sleep(sleepInMilliseconds);
+
+                DisplayPromptEditorMenu();    
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: You must enter an integer value from 1 to 5.");
+
+            Thread.Sleep(sleepInMilliseconds);
+
+            DisplayPromptEditorMenu();
+        }
     }
 
     public void DisplayNumberedPrompts()
     {
+        Console.Clear();
+        Console.WriteLine("Prompts:\n");
+
         int index = 0;
         string spacer = "";
 
@@ -98,12 +155,12 @@ public class PromptOptions
 
     }
 
-    public void LoadPromptList(string filename)
+    public void LoadPromptList()
     {
 
     }
 
-	public void WritePromptList(string filename)
+	public void WritePromptList()
     {
 
     }
