@@ -125,7 +125,7 @@ public class PromptOptions
 
         DisplayNumberedPrompts(false);
 
-        Console.Write("Enter the number of the prompt you wish to delete: ");
+        Console.Write("\nEnter the number of the prompt you wish to delete: ");
  
         string promptNumberString = Console.ReadLine();
 
