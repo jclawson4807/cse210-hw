@@ -10,7 +10,13 @@ class Program
     static void Main(string[] args)
     {
         // TODO - try to load prompt options list - if file is not found - populate default list
-        promptOptions.PopulateDefaultPromptList();
+        promptOptions.LoadPromptList();
+
+        if (promptOptions._promptList.Count == 0)
+        {
+            promptOptions.PopulateDefaultPromptList();
+        }
+
         DisplayPrimaryMenu();
     }
 

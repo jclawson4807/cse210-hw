@@ -241,12 +241,6 @@ public class PromptOptions
         var promptList = JsonSerializer.Deserialize<List<string>>(loadedPersonFile,  options);
 
         _promptList = promptList;
-
-        Console.WriteLine("\nPrompt data read from file.\n");
-
-        Thread.Sleep(sleepInMilliseconds);
-
-        DisplayPromptEditorMenu();
     }
 
 	public async void WritePromptList()
