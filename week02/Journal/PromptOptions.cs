@@ -51,7 +51,15 @@ public class PromptOptions
 
     public string GetPromptByIndex(int promptIndex)
     {
-        return "";
+        // make sure that the promptIndex provided is within the range of the promptList
+        if (promptIndex > 0 && promptIndex < _promptList.Count)
+        {
+            return _promptList[promptIndex];
+        }
+        else
+        {
+            return GetRandomPrompt();
+        }
     }
 
     public string GetRandomPrompt()
@@ -68,7 +76,7 @@ public class PromptOptions
     {
 
     }
-    
+
 	public void WritePromptList(string filename)
     {
 
