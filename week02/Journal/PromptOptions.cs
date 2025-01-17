@@ -1,4 +1,5 @@
 using System;
+using System.Net.Security;
 
 public class PromptOptions
 {
@@ -40,12 +41,20 @@ public class PromptOptions
 
     public void DeletePromptByIndex(int promptIndex)
     {
-
+        // make sure that the promptIndex provided is within the range of the promptList
+        if (promptIndex > 0 && promptIndex < _promptList.Count)
+        {
+            _promptList.RemoveAt(promptIndex);
+        }
+        else
+        {
+            DisplayPromptIndexOutOfRangeError(promptIndex);
+        }         
     }
 
     public void DisplayPromptIndexOutOfRangeError(int promptIndex)
     {
-        
+        Console.WriteLine($"Error: Index {promptIndex} is out of bounds.");    
     }
 
     public void AddNewPrompt(string newPrompt)
