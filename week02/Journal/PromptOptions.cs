@@ -5,12 +5,12 @@ using System.Text.Json;
 
 public class PromptOptions
 {
-    Random random = new Random();
-    int sleepInMilliseconds = 2000;
+    Random _random = new Random();
+    int _sleepInMilliseconds = 2000;
 
     public List<string> _promptList = new List<string>();
 
-    string promptFileName = "prompts.json";
+    string _promptFileName = "prompts.json";
 
     public int DisplayPromptEditorMenu(bool clearConsole = true)
     {
@@ -67,7 +67,7 @@ public class PromptOptions
             {
                 Console.WriteLine("Error: You must enter an integer value from 1 to 5.");
 
-                Thread.Sleep(sleepInMilliseconds);
+                Thread.Sleep(_sleepInMilliseconds);
 
                 return DisplayPromptEditorMenu();    
             }
@@ -76,7 +76,7 @@ public class PromptOptions
         {
             Console.WriteLine("Exception: You must enter an integer value from 1 to 5.");
 
-            Thread.Sleep(sleepInMilliseconds);
+            Thread.Sleep(_sleepInMilliseconds);
 
             return DisplayPromptEditorMenu();
         }
@@ -143,7 +143,7 @@ public class PromptOptions
         {
             Console.WriteLine("Exception: You must enter a valid integer.");
 
-            Thread.Sleep(sleepInMilliseconds);
+            Thread.Sleep(_sleepInMilliseconds);
 
             return DisplayDeletePromptMenu();
         }
@@ -158,7 +158,7 @@ public class PromptOptions
 
             Console.WriteLine($"\nPrompt at index {promptIndex} removed.");
             
-            Thread.Sleep(sleepInMilliseconds);
+            Thread.Sleep(_sleepInMilliseconds);
 
             return 0;
         }
@@ -171,7 +171,7 @@ public class PromptOptions
     public int DisplayPromptIndexOutOfRangeError(int promptIndex)
     {
         Console.WriteLine($"Error: Index {promptIndex} is out of bounds.");
-        Thread.Sleep(sleepInMilliseconds);
+        Thread.Sleep(_sleepInMilliseconds);
 
         return 1;    
     }
@@ -188,7 +188,7 @@ public class PromptOptions
 
             Console.WriteLine("\nNew Prompt Added.\n");
 
-            Thread.Sleep(sleepInMilliseconds);
+            Thread.Sleep(_sleepInMilliseconds);
 
             return DisplayPromptEditorMenu();
         }
@@ -196,7 +196,7 @@ public class PromptOptions
         {
             Console.WriteLine("\nThat prompt text is already in the prompt list.  Please try again.\n");
 
-            Thread.Sleep(sleepInMilliseconds);
+            Thread.Sleep(_sleepInMilliseconds);
 
             return DisplayAddPromptMenu();
         }
@@ -217,7 +217,7 @@ public class PromptOptions
 
     public string GetRandomPrompt()
     {
-        int randomIndex = random.Next(_promptList.Count);
+        int randomIndex = _random.Next(_promptList.Count);
         return _promptList[randomIndex];
     }
 
@@ -233,9 +233,9 @@ public class PromptOptions
 
     public void LoadPromptList()
     {
-        if (File.Exists(promptFileName))
+        if (File.Exists(_promptFileName))
         {
-            string loadedPromptFile = File.ReadAllText(promptFileName);
+            string loadedPromptFile = File.ReadAllText(_promptFileName);
 
             Console.WriteLine(loadedPromptFile);
 
@@ -255,11 +255,11 @@ public class PromptOptions
         // JSON write code from https://code-maze.com/introduction-system-text-json-examples/
 
         string jsonSerializedPrompt = JsonSerializer.Serialize(_promptList);
-        File.WriteAllText(promptFileName, jsonSerializedPrompt);
+        File.WriteAllText(_promptFileName, jsonSerializedPrompt);
 
         Console.WriteLine("\nPrompt data written to file.\n");
 
-        Thread.Sleep(sleepInMilliseconds);
+        Thread.Sleep(_sleepInMilliseconds);
 
         DisplayPromptEditorMenu();
     }

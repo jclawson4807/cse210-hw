@@ -5,7 +5,7 @@ using System.Text.Json;
 public class Journal
 {
 
-    int sleepInMilliseconds = 2000;
+    int _sleepInMilliseconds = 2000;
     public List<JournalEntry> _journalEntryList = new List<JournalEntry>();
 
     public int DisplaySaveJournalMenu()
@@ -44,7 +44,7 @@ public class Journal
 
         Console.WriteLine("\nJournal data written to file.\n");
 
-        Thread.Sleep(sleepInMilliseconds);
+        Thread.Sleep(_sleepInMilliseconds);
 
         return 0;    
     }
@@ -64,7 +64,7 @@ public class Journal
 
             Console.WriteLine("Loaded Journal Data");
 
-            Thread.Sleep(sleepInMilliseconds);
+            Thread.Sleep(_sleepInMilliseconds);
 
             return 0;
         }
@@ -72,7 +72,7 @@ public class Journal
         {
             Console.WriteLine($"\nError: No file found for filename {filename}.");
 
-            Thread.Sleep(sleepInMilliseconds);
+            Thread.Sleep(_sleepInMilliseconds);
 
             return DisplayLoadJournalMenu();
         }    
@@ -179,7 +179,7 @@ public class Journal
             {
                 Console.WriteLine("Error: You must enter an integer value from 1 to 6.");
 
-                Thread.Sleep(sleepInMilliseconds);
+                Thread.Sleep(_sleepInMilliseconds);
 
                 return DisplayJournalOptionsMenu(prompt, prompt_response, promptOptions);
             }
@@ -188,7 +188,7 @@ public class Journal
         {
             Console.WriteLine("Exception: You must enter an integer value from 1 to 6.");
 
-            Thread.Sleep(sleepInMilliseconds);
+            Thread.Sleep(_sleepInMilliseconds);
 
             return DisplayJournalOptionsMenu(prompt, prompt_response, promptOptions);
         }
