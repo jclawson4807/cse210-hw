@@ -1,10 +1,11 @@
 using System;
 
+// [Serializable]
 public class JournalEntry
 {
-    public string _prompt;
-    public string _journalEntryText;
-    public DateTime _journalEntryTimeStamp;
+    public string _prompt { get; set; } = "";
+    public string _journalEntryText { get; set; } = "";
+    public DateTime _journalEntryTimeStamp { get; set; } = DateTime.Now;
 
     public void Display()
     {

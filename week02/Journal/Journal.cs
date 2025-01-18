@@ -36,7 +36,9 @@ public class Journal
     {
         var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
-        Console.WriteLine(_journalEntryList[0]._journalEntryText);
+        // var jsonString = JsonSerializer.Serialize(testEntry);
+
+        // Console.WriteLine(jsonString);
 
         string jsonSerializedJournal = JsonSerializer.Serialize(_journalEntryList, options);
 
@@ -86,7 +88,6 @@ public class Journal
         // if sort type == 1 - sort by date
         // if sort type == 2 - sort by prompt
         // if sort type == 3 - sort by journal entry text
-        // @TODO - include link to C# code to sort list by class member
 
         List<JournalEntry> sortedJournalList = _journalEntryList;
 
