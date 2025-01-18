@@ -74,7 +74,7 @@ public class PromptOptions
         }
         catch (Exception e)
         {
-            Console.WriteLine("Exception: You must enter an integer value from 1 to 5.");
+            Console.WriteLine($"Exception: You must enter an integer value from 1 to 5. ({e})");
 
             Thread.Sleep(_sleepInMilliseconds);
 
@@ -141,7 +141,7 @@ public class PromptOptions
         }
         catch (Exception e)
         {
-            Console.WriteLine("Exception: You must enter a valid integer.");
+            Console.WriteLine($"Exception: You must enter a valid integer. ({e})");
 
             Thread.Sleep(_sleepInMilliseconds);
 

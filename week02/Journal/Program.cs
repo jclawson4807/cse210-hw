@@ -88,7 +88,7 @@ class Program
         }
         catch (Exception e)
         {
-            Console.WriteLine("Exception: You must enter an integer value from 1 to 8.");
+            Console.WriteLine($"Exception: You must enter an integer value from 1 to 8.  ({e})");
 
             Thread.Sleep(sleepInMilliseconds);
 

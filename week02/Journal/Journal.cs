@@ -4,7 +4,6 @@ using System.Text.Json;
 
 public class Journal
 {
-
     int _sleepInMilliseconds = 2000;
     public List<JournalEntry> _journalEntryList = new List<JournalEntry>();
 
@@ -38,8 +37,6 @@ public class Journal
 
         string jsonSerializedJournal = JsonSerializer.Serialize(_journalEntryList, options);
 
-        Console.WriteLine(jsonSerializedJournal);
-
         File.WriteAllText(filename, jsonSerializedJournal);
 
         Console.WriteLine("\nJournal data written to file.\n");
@@ -55,14 +52,12 @@ public class Journal
         {
             string loadedJournalJsonString = File.ReadAllText(filename);
 
-            Console.WriteLine(loadedJournalJsonString);
-
             var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
             var journalData = JsonSerializer.Deserialize<List<JournalEntry>>(loadedJournalJsonString, options);
 
             _journalEntryList = journalData;
 
-            Console.WriteLine("Loaded Journal Data");
+            Console.WriteLine("\nLoaded Journal Data");
 
             Thread.Sleep(_sleepInMilliseconds);
 
@@ -134,6 +129,8 @@ public class Journal
         Console.WriteLine("5. Load Journal");
         Console.WriteLine("6. Return to menu\n");
 
+        Console.WriteLine("** Note that if you want to keep your journal entry, you must enter menu option 1 after creating the journal entry.  Otherwise, it will be discarded. **\n");
+
         Console.Write("Select a menu option: ");
 
         string menuOptionString = Console.ReadLine();
@@ -186,7 +183,7 @@ public class Journal
         }
         catch (Exception e)
         {
-            Console.WriteLine("Exception: You must enter an integer value from 1 to 6.");
+            Console.WriteLine($"Exception: You must enter an integer value from 1 to 6. ({e})");
 
             Thread.Sleep(_sleepInMilliseconds);
 
