@@ -36,10 +36,6 @@ public class Journal
     {
         var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
-        // var jsonString = JsonSerializer.Serialize(testEntry);
-
-        // Console.WriteLine(jsonString);
-
         string jsonSerializedJournal = JsonSerializer.Serialize(_journalEntryList, options);
 
         Console.WriteLine(jsonSerializedJournal);
