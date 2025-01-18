@@ -34,7 +34,14 @@ public class Journal
 
     public int SaveJournal(string filename)
     {
-        string jsonSerializedJournal = JsonSerializer.Serialize(_journalEntryList);
+        var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+
+        Console.WriteLine(_journalEntryList[0]._journalEntryText);
+
+        string jsonSerializedJournal = JsonSerializer.Serialize(_journalEntryList, options);
+
+        Console.WriteLine(jsonSerializedJournal);
+
         File.WriteAllText(filename, jsonSerializedJournal);
 
         Console.WriteLine("\nJournal data written to file.\n");
@@ -73,7 +80,7 @@ public class Journal
         }    
     }
 
-    public void DisplaySortedJournalEntries(int sort_type)
+    public void DisplaySortedJournalEntries(int sortType)
     {
         // if sort type == 0 - do not sort
         // if sort type == 1 - sort by date
@@ -81,11 +88,29 @@ public class Journal
         // if sort type == 3 - sort by journal entry text
         // @TODO - include link to C# code to sort list by class member
 
-        foreach (JournalEntry journalEntry in _journalEntryList)
+        List<JournalEntry> sortedJournalList = _journalEntryList;
+
+        if (sortType == 1)
+        {
+            sortedJournalList = _journalEntryList.OrderBy(x => x._journalEntryTimeStamp).ToList();
+        }
+        else if (sortType == 2)
+        {
+            sortedJournalList = _journalEntryList.OrderBy(x => x._prompt).ToList();
+        }
+        else if (sortType == 3)
+        {
+            sortedJournalList = _journalEntryList.OrderBy(x => x._journalEntryText).ToList();
+        }
+
+        foreach (JournalEntry journalEntry in sortedJournalList)
         {
             journalEntry.Display();
             Console.WriteLine("");
         }
+
+        Console.WriteLine("Press enter to return to the menu.");
+        string returnText = Console.ReadLine();
     }
 
     public int DisplayJournalEditor(string prompt, PromptOptions promptOptions)
