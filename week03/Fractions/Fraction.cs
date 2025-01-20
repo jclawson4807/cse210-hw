@@ -56,7 +56,7 @@ class Fraction
         }
         else
         {
-            return _top / _bottom;
+            return Convert.ToDouble(_top) / Convert.ToDouble(_bottom);
         }
     }
 }

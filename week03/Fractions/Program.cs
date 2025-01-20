@@ -5,17 +5,15 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Fractions Project.");
-
         Fraction fraction1 = new Fraction();
-        Fraction fraction2 = new Fraction(52);
-        Fraction fraction3 = new Fraction(22, 3);
+        Fraction fraction2 = new Fraction(5);
+        Fraction fraction3 = new Fraction(3, 4);
 
         DisplayFractionValues(fraction1);
         DisplayFractionValues(fraction2);
         DisplayFractionValues(fraction3);
 
-        fraction1.SetTop(2);
+        fraction1.SetTop(1);
         fraction1.SetBottom(3);
 
         DisplayFractionValues(fraction1);
@@ -23,6 +21,7 @@ class Program
 
     static void DisplayFractionValues(Fraction fraction)
     {
-        Console.WriteLine($"top: {fraction.GetTop()} bottom: {fraction.GetBottom()}");
+        Console.WriteLine(fraction.GetFractionString());
+        Console.WriteLine($"{fraction.GetDecimalValue()}");
     }
 }
