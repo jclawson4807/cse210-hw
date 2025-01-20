@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 class Fraction
 {
@@ -50,13 +52,14 @@ class Fraction
 
     public double GetDecimalValue()
     {
-        if (_bottom == 0)
-        {
-            return 0;
-        }
-        else
+        try
         {
             return Convert.ToDouble(_top) / Convert.ToDouble(_bottom);
+        }
+        catch (DivideByZeroException e)
+        {
+            Console.WriteLine($"Exception {e.Message}: Division by 0 not allowed.  Returning numerator.");
+            return (double) _top;
         }
     }
 }
