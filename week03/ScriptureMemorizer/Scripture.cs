@@ -96,5 +96,9 @@ class Scripture
                 }
             }
         }
+        else
+        {
+            Environment.Exit(0);
+        }
     }
 }
