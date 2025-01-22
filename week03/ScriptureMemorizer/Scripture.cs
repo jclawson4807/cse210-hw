@@ -45,4 +45,13 @@ class Scripture
         PopulateWordListForScriptureText(scriptureText);
     }
 
+    public void DisplayScripture()
+    {
+        _scriptureReference.DisplayScriptureReferenceString();
+        
+        foreach (Word word in _wordsList)
+        {
+            word.DisplayWord();
+        }
+    }
 }
