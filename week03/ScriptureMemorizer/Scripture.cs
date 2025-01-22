@@ -60,11 +60,47 @@ class Scripture
         }
     }
 
+    // public void HideWords(bool hideHiddenWords)
+    // {
+    //     Random random = new Random();
+
+    //     int numberOfWordsToHide = random.Next(1, 3);
+
+    //     int listSize = _wordsList.Count;
+
+    //     for (int i = 0; i < numberOfWordsToHide; i++)
+    //     {
+    //         int randomIndex = random.Next(0, listSize);
+
+    //         Word wordAtIndex = _wordsList[randomIndex];
+
+    //         if (wordAtIndex.GetIsWord())
+    //         {
+    //             if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
+    //             {
+    //                 wordAtIndex.SetIsHidden(true);
+
+    //                 _wordsList[randomIndex] = wordAtIndex;
+    //             }
+    //             else
+    //             {
+    //                 i--;    
+    //             }
+    //         }
+    //         else
+    //         {
+    //             i--;
+    //         }
+    //     }
+    // }
+
     public void HideWords(bool hideHiddenWords)
     {
         Random random = new Random();
 
-        int numberOfWordsToHide = random.Next(1, 3);
+        int numberOfWordsToHide = 3; // random.Next(1, 3);
+
+        Console.WriteLine(numberOfWordsToHide);
 
         int listSize = _wordsList.Count;
 
@@ -72,25 +108,31 @@ class Scripture
         {
             int randomIndex = random.Next(0, listSize);
 
+            Console.WriteLine(randomIndex);
+
             Word wordAtIndex = _wordsList[randomIndex];
 
-            if (wordAtIndex.GetIsWord())
-            {
-                if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
-                {
-                    wordAtIndex.SetIsHidden(true);
+            wordAtIndex.SetIsHidden(true);
 
-                    _wordsList[randomIndex] = wordAtIndex;
-                }
-                else
-                {
-                    i--;    
-                }
-            }
-            else
-            {
-                i--;
-            }
+            _wordsList[randomIndex] = wordAtIndex;
+
+            // if (wordAtIndex.GetIsWord())
+            // {
+            //     if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
+            //     {
+            //         wordAtIndex.SetIsHidden(true);
+
+            //         _wordsList[randomIndex] = wordAtIndex;
+            //     }
+            //     else
+            //     {
+            //         i--;    
+            //     }
+            // }
+            // else
+            // {
+            //     i--;
+            // }
         }
     }
 }
