@@ -68,6 +68,6 @@ class Word
 
     public void DisplayWord()
     {
-        Console.Write(GetWord());
+        Console.Write($"{GetWord()} ");
     }
 }
