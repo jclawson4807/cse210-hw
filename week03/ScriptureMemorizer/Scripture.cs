@@ -53,6 +53,11 @@ class Scripture
         PopulateWordListForScriptureText(scriptureText);
     }
 
+    public ScriptureReference GetScriptureReference()
+    {
+        return _scriptureReference;
+    }
+
     public void DisplayScripture()
     {
         Console.Clear();
