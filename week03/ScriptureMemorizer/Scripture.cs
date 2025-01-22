@@ -14,6 +14,12 @@ class Scripture
     {
         SetScripture(scriptureReferenceText, scriptureText);
     }
+    public Scripture(string bookOfScriptureName, int chapterNumber, int startVerse, int endVerse, string scriptureText)
+    {
+        string scriptureReferenceText = $"{bookOfScriptureName} {chapterNumber}: {startVerse}-{endVerse}";
+
+        SetScripture(scriptureReferenceText, scriptureText);
+    }
 
     private void PopulateWordListForScriptureText(string scriptureText)
     {
