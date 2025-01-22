@@ -8,6 +8,11 @@ class Scripture
 
     private string _scriptureText;
 
+    public Scripture(string scriptureReferenceText, string scriptureText)
+    {
+        SetScripture(scriptureReferenceText, scriptureText);
+    }
+
     private void PopulateWordListForScriptureText(string scriptureText)
     {
         _wordsList.Clear();
@@ -30,8 +35,10 @@ class Scripture
         }
     }
 
-    public Scripture(ScriptureReference scriptureReference, string scriptureText)
+    public void SetScripture(string scriptureReferenceText, string scriptureText)
     {
+        ScriptureReference scriptureReference = new ScriptureReference(scriptureReferenceText);
+
         _scriptureReference = scriptureReference;
         _scriptureText = scriptureText;
 
