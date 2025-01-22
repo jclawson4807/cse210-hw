@@ -60,4 +60,9 @@ class Word
     {
         return _isHidden;
     }
+
+    public bool GetIsWord()
+    {
+        return _isWord;
+    }
 }
