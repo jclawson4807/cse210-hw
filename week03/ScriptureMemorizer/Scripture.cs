@@ -36,7 +36,7 @@ class Scripture
 
             _wordsList.Add(newWord);
         }
-        
+
         Console.WriteLine();
     }
 
@@ -57,6 +57,40 @@ class Scripture
         foreach (Word word in _wordsList)
         {
             word.DisplayWord();
+        }
+    }
+
+    public void HideWords(bool hideHiddenWords)
+    {
+        Random random = new Random();
+
+        int numberOfWordsToHide = random.Next(1, 3);
+
+        int listSize = _wordsList.Count;
+
+        for (int i = 0; i < numberOfWordsToHide; i++)
+        {
+            int randomIndex = random.Next(0, listSize);
+
+            Word wordAtIndex = _wordsList[randomIndex];
+
+            if (wordAtIndex.GetIsWord())
+            {
+                if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
+                {
+                    wordAtIndex.SetIsHidden(true);
+
+                    _wordsList[randomIndex] = wordAtIndex;
+                }
+                else
+                {
+                    i--;    
+                }
+            }
+            else
+            {
+                i--;
+            }
         }
     }
 }

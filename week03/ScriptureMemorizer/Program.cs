@@ -8,6 +8,12 @@ class Program
 
         scripture.DisplayScripture();
 
+        scripture.HideWords(false);
 
+        scripture.DisplayScripture();
+
+        scripture.HideWords(false);
+
+        scripture.DisplayScripture();
     }
 }
