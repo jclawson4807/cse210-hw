@@ -6,6 +6,7 @@ Exceeding Requirements
 
 1) I added support for multiple scriptures
 2) When hiding words, only unhidden words are hidden
+3) Add menu which allows the user to add a new scripture to study
 
 */
 
@@ -22,8 +23,6 @@ class Program
         scriptures.Add(new Scripture("Alma", 5, 6, 7, "6 And now behold, I say unto you, my brethren, you that belong to this church, have you sufficiently retained in remembrance the captivity of your fathers? Yea, and have you sufficiently retained in remembrance his mercy and long-suffering towards them? And moreover, have ye sufficiently retained in remembrance that he has delivered their souls from hell? 7 Behold, he changed their hearts; yea, he awakened them out of a deep sleep, and they awoke unto God. Behold, they were in the midst of darkness; nevertheless, their souls were illuminated by the light of the everlasting word; yea, they were encircled about by the bands of death, and the chains of hell, and an everlasting destruction did await them."));
 
         DisplayScriptureSelector();
-
-        DisplayScriptureWithMenu(true);
     }
 
     public static void DisplayScriptureSelector()
@@ -40,13 +39,14 @@ class Program
             index++;
         }
 
-        Console.Write("\nEnter scriputure ID: ");
+        Console.Write("\nEnter scripture ID: ");
 
         string scriptureIDString = Console.ReadLine();
 
         try
         {
             selectedScriptureIndex = int.Parse(scriptureIDString);
+            DisplayScriptureWithMenu(true);
         }
         catch (Exception e)
         {
@@ -55,6 +55,61 @@ class Program
             Thread.Sleep(sleepInMilliseconds);
 
             DisplayScriptureSelector();
+        }
+    }
+
+    public static void DisplayAddScriptureMenu()
+    {
+        Console.Clear();
+
+        Console.WriteLine("Add Scripture\n");
+
+        try
+        {
+            Console.Write("\nEnter the name of the book of scripture (such as 1 Nephi): ");
+
+            string bookOfScriptureName = Console.ReadLine();
+
+            Console.Write("\nEnter the chapter number as an integer: ");
+
+            string inputString = Console.ReadLine();
+
+            int chapterNumberInt = int.Parse(inputString);
+
+            Console.Write("\nEnter the starting verse number as an integer: ");
+
+            inputString = Console.ReadLine();
+
+            int startingVerseInt = int.Parse(inputString);
+
+            Console.Write("\nEnter the ending verse number as an integer.  If the scripture text is only one verse long, enter the same number as the starting verse number: ");
+
+            inputString = Console.ReadLine();
+
+            int endingVerseInt = int.Parse(inputString);
+
+            Console.Write("\nEnter the scripture text.  This must be entered as a single line of text.");
+
+            string scriptureText = Console.ReadLine();
+
+            if (startingVerseInt == endingVerseInt)
+            {
+                scriptures.Add(new Scripture(bookOfScriptureName, chapterNumberInt, startingVerseInt, scriptureText));    
+            }
+            else
+            {
+                scriptures.Add(new Scripture(bookOfScriptureName, chapterNumberInt, startingVerseInt, endingVerseInt, scriptureText));
+            }
+
+            DisplayScriptureSelector();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: You must enter an integer value  ({e})");
+
+            Thread.Sleep(sleepInMilliseconds);
+
+            DisplayAddScriptureMenu();
         }
     }
 
@@ -72,7 +127,7 @@ class Program
         Console.WriteLine();
         Console.WriteLine();
 
-        Console.WriteLine("Press enter to continue, 'new' for a new scripture, or type 'quit' to finish:");
+        Console.WriteLine("Press enter to continue, 'new' for a new scripture, 'add' to add a scripture, or type 'quit' to finish:");
 
         string readLine = Console.ReadLine();
 
@@ -87,7 +142,10 @@ class Program
             if (readLine.ToLower().Trim() == "new")
             {
                 DisplayScriptureSelector();
-                DisplayScriptureWithMenu(true);
+            }
+            else if (readLine.ToLower().Trim() == "add")
+            {
+                DisplayAddScriptureMenu();
             }
             else if (readLine.ToLower().Trim() == "quit")
             {
