@@ -1,6 +1,14 @@
 using System;
 using System.Data;
 
+/*
+Exceeding Requirements
+
+1) I added support for multiple scriptures
+2) When hiding words, only unhidden words are hidden
+
+*/
+
 class Program
 {
     static List<Scripture> scriptures = new List<Scripture>();
