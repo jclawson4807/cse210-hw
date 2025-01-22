@@ -65,4 +65,9 @@ class Word
     {
         return _isWord;
     }
+
+    public void DisplayWord()
+    {
+        Console.Write(GetWord());
+    }
 }
