@@ -48,6 +48,8 @@ class Scripture
 
     public void DisplayScripture()
     {
+        Console.Clear();
+        
         _scriptureReference.DisplayScriptureReferenceString();
 
         foreach (Word word in _wordsList)
@@ -69,10 +71,6 @@ class Scripture
             int randomIndex = random.Next(0, _wordsList.Count);
 
             Word wordAtIndex = _wordsList[randomIndex];
-
-            wordAtIndex.SetIsHidden(true);
-
-            _wordsList[randomIndex] = wordAtIndex;
 
             if (wordAtIndex.GetIsWord())
             {
