@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 class Scripture
 {
@@ -17,7 +18,9 @@ class Scripture
     {
         _wordsList.Clear();
         
-        string[] tokens = scriptureText.Split(new char[] { ' ', ',', '?', '.', '!' });
+        string regexPattern = "(/[^a-zA-Z]/)"; // scriptureText.Split(new char[] { ' ', ',', '?', '.', '!' });
+
+        string[] tokens = Regex.Split(scriptureText, regexPattern); 
         
         foreach (string token in tokens) {
             bool isWord = false;
@@ -33,6 +36,8 @@ class Scripture
 
             _wordsList.Add(newWord);
         }
+        
+        Console.WriteLine();
     }
 
     public void SetScripture(string scriptureReferenceText, string scriptureText)
