@@ -15,7 +15,7 @@ class Program
 
         DisplayScriptureSelector();
 
-        DisplayScriptureWithMenu();
+        DisplayScriptureWithMenu(true);
     }
 
     public static void DisplayScriptureSelector()
@@ -50,9 +50,14 @@ class Program
         }
     }
 
-    public static void DisplayScriptureWithMenu()
+    public static void DisplayScriptureWithMenu(bool resetHiddenWords = false)
     {
         Scripture scripture = scriptures[selectedScriptureIndex];
+
+        if (resetHiddenWords)
+        {
+            scripture.ResetHiddenWords();
+        }
         
         scripture.DisplayScripture();  
 
@@ -74,7 +79,7 @@ class Program
             if (readLine.ToLower().Trim() == "new")
             {
                 DisplayScriptureSelector();
-                DisplayScriptureWithMenu();
+                DisplayScriptureWithMenu(true);
             }
             else if (readLine.ToLower().Trim() == "quit")
             {

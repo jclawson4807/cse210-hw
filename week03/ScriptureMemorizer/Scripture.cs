@@ -18,6 +18,7 @@ class Scripture
     private void PopulateWordListForScriptureText(string scriptureText)
     {
         _wordsList.Clear();
+        _visibleWordIndexes.Clear();
 
         int visibleIndex = 0;
         
@@ -68,6 +69,11 @@ class Scripture
         {
             word.DisplayWord();
         }
+    }
+
+    public void ResetHiddenWords()
+    {
+        PopulateWordListForScriptureText(_scriptureText);
     }
 
     public void HideWords(bool hideHiddenWords)
