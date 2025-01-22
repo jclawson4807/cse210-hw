@@ -18,26 +18,22 @@ class Scripture
     {
         _wordsList.Clear();
         
-        string regexPattern = "(/[^a-zA-Z]/)"; // scriptureText.Split(new char[] { ' ', ',', '?', '.', '!' });
+        string regexPattern = @"[^A-Za-z]";
 
         string[] tokens = Regex.Split(scriptureText, regexPattern); 
         
-        foreach (string token in tokens) {
-            bool isWord = false;
+        foreach (string token in tokens) 
+        {
+            bool isWord = true;
             int tokenLength = token.Length;
             string testToken = token.ToLower();
 
-            if (tokenLength > 1 || (testToken == "a" || testToken == "i" || testToken == "a"))
-            {
-                isWord = true;
-            }
+            string trimmedToken = token.Trim();
 
-            Word newWord = new Word(token,isWord);
+            Word newWord = new Word(trimmedToken, isWord);
 
             _wordsList.Add(newWord);
         }
-
-        Console.WriteLine();
     }
 
     public void SetScripture(string scriptureReferenceText, string scriptureText)
@@ -53,62 +49,24 @@ class Scripture
     public void DisplayScripture()
     {
         _scriptureReference.DisplayScriptureReferenceString();
-        
+
         foreach (Word word in _wordsList)
         {
             word.DisplayWord();
         }
     }
 
-    // public void HideWords(bool hideHiddenWords)
-    // {
-    //     Random random = new Random();
-
-    //     int numberOfWordsToHide = random.Next(1, 3);
-
-    //     int listSize = _wordsList.Count;
-
-    //     for (int i = 0; i < numberOfWordsToHide; i++)
-    //     {
-    //         int randomIndex = random.Next(0, listSize);
-
-    //         Word wordAtIndex = _wordsList[randomIndex];
-
-    //         if (wordAtIndex.GetIsWord())
-    //         {
-    //             if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
-    //             {
-    //                 wordAtIndex.SetIsHidden(true);
-
-    //                 _wordsList[randomIndex] = wordAtIndex;
-    //             }
-    //             else
-    //             {
-    //                 i--;    
-    //             }
-    //         }
-    //         else
-    //         {
-    //             i--;
-    //         }
-    //     }
-    // }
-
     public void HideWords(bool hideHiddenWords)
     {
         Random random = new Random();
 
-        int numberOfWordsToHide = 3; // random.Next(1, 3);
+        int numberOfWordsToHide = random.Next(1, 3);
 
-        Console.WriteLine(numberOfWordsToHide);
-
-        int listSize = _wordsList.Count;
+        Console.WriteLine();
 
         for (int i = 0; i < numberOfWordsToHide; i++)
         {
-            int randomIndex = random.Next(0, listSize);
-
-            Console.WriteLine(randomIndex);
+            int randomIndex = random.Next(0, _wordsList.Count);
 
             Word wordAtIndex = _wordsList[randomIndex];
 
@@ -116,23 +74,15 @@ class Scripture
 
             _wordsList[randomIndex] = wordAtIndex;
 
-            // if (wordAtIndex.GetIsWord())
-            // {
-            //     if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
-            //     {
-            //         wordAtIndex.SetIsHidden(true);
+            if (wordAtIndex.GetIsWord())
+            {
+                if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
+                {
+                    wordAtIndex.SetIsHidden(true);
 
-            //         _wordsList[randomIndex] = wordAtIndex;
-            //     }
-            //     else
-            //     {
-            //         i--;    
-            //     }
-            // }
-            // else
-            // {
-            //     i--;
-            // }
+                    _wordsList[randomIndex] = wordAtIndex;
+                }
+            }
         }
     }
 }
