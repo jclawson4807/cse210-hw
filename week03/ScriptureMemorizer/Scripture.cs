@@ -6,6 +6,7 @@ class Scripture
     private ScriptureReference _scriptureReference;
 
     private List<Word> _wordsList = new List<Word>();
+    private List<int> _visibleWordIndexes = new List<int>();
 
     private string _scriptureText;
 
@@ -17,6 +18,8 @@ class Scripture
     private void PopulateWordListForScriptureText(string scriptureText)
     {
         _wordsList.Clear();
+
+        int visibleIndex = 0;
         
         string regexPattern = @"[^A-Za-z]";
 
@@ -33,6 +36,10 @@ class Scripture
             Word newWord = new Word(trimmedToken, isWord);
 
             _wordsList.Add(newWord);
+
+            _visibleWordIndexes.Add(visibleIndex);
+
+            visibleIndex++;
         }
     }
 
@@ -66,19 +73,26 @@ class Scripture
 
         Console.WriteLine();
 
-        for (int i = 0; i < numberOfWordsToHide; i++)
+        if (_visibleWordIndexes.Count > 0)
         {
-            int randomIndex = random.Next(0, _wordsList.Count);
-
-            Word wordAtIndex = _wordsList[randomIndex];
-
-            if (wordAtIndex.GetIsWord())
+            for (int i = 0; i < numberOfWordsToHide; i++)
             {
-                if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
-                {
-                    wordAtIndex.SetIsHidden(true);
+                int randomIndex = random.Next(0, _visibleWordIndexes.Count);
 
-                    _wordsList[randomIndex] = wordAtIndex;
+                int index = _visibleWordIndexes[randomIndex];
+
+                Word wordAtIndex = _wordsList[index];
+
+                if (wordAtIndex.GetIsWord())
+                {
+                    if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
+                    {
+                        wordAtIndex.SetIsHidden(true);
+
+                        _wordsList[index] = wordAtIndex;
+
+                        _visibleWordIndexes.RemoveAt(randomIndex);
+                    }
                 }
             }
         }
