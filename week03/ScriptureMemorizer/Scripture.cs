@@ -10,13 +10,15 @@ class Scripture
 
     private string _scriptureText;
 
-    public Scripture(string scriptureReferenceText, string scriptureText)
+    public Scripture(string bookOfScriptureName, int chapterNumber, int verseNumber, string scriptureText)
     {
+        string scriptureReferenceText = $"{bookOfScriptureName} {chapterNumber}: {verseNumber}";
+        
         SetScripture(scriptureReferenceText, scriptureText);
     }
-    public Scripture(string bookOfScriptureName, int chapterNumber, int startVerse, int endVerse, string scriptureText)
+    public Scripture(string bookOfScriptureName, int chapterNumber, int startVerseNumber, int endVerseNumber, string scriptureText)
     {
-        string scriptureReferenceText = $"{bookOfScriptureName} {chapterNumber}: {startVerse}-{endVerse}";
+        string scriptureReferenceText = $"{bookOfScriptureName} {chapterNumber}: {startVerseNumber}-{endVerseNumber}";
 
         SetScripture(scriptureReferenceText, scriptureText);
     }
