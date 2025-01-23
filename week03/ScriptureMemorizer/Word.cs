@@ -6,15 +6,10 @@ class Word
     private string _hiddenWord = "";
     private int _wordLength;
     private bool _isHidden = false;
-
-    private bool _isWord = true; // I need the be able to store a space or punctuation.  Those can not be made hidden.
-
-    public Word(string word, bool isWord = true)
+    public Word(string word)
     {
         _word = word;
         _wordLength = word.Length;
-
-        _isWord = isWord;
 
         CreateHiddenWord();
     }
@@ -23,12 +18,9 @@ class Word
     {
         _hiddenWord = "";
 
-        if (_isWord)
+        for (int i = 0; i < _wordLength; i++)
         {
-            for (int i = 0; i < _wordLength; i++)
-            {
-                _hiddenWord = _hiddenWord + "_";
-            }
+            _hiddenWord += "_";
         }
     }
 
@@ -46,24 +38,12 @@ class Word
 
     public void SetIsHidden(bool isHidden)
     {
-        if (_isWord)
-        {
-             _isHidden = isHidden;
-        }
-        else
-        {
-            _isHidden = false;    
-        }
+        _isHidden = isHidden;
     }
 
     public bool GetIsHidden()
     {
         return _isHidden;
-    }
-
-    public bool GetIsWord()
-    {
-        return _isWord;
     }
 
     public void DisplayWord()

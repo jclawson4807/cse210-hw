@@ -88,7 +88,7 @@ class Program
 
             int endingVerseInt = int.Parse(inputString);
 
-            Console.Write("\nEnter the scripture text.  This must be entered as a single line of text.");
+            Console.Write("\nEnter the scripture text.  This must be entered as a single line of text. ");
 
             string scriptureText = Console.ReadLine();
 

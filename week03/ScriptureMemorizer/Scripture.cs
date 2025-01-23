@@ -1,5 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
 
 class Scripture
 {
@@ -34,13 +33,9 @@ class Scripture
         
         foreach (string token in tokens) 
         {
-            bool isWord = true;
-            int tokenLength = token.Length;
-            string testToken = token.ToLower();
-
             string trimmedToken = token.Trim();
 
-            Word newWord = new Word(trimmedToken, isWord);
+            Word newWord = new Word(trimmedToken);
 
             _wordsList.Add(newWord);
 
@@ -100,16 +95,13 @@ class Scripture
 
                 Word wordAtIndex = _wordsList[index];
 
-                if (wordAtIndex.GetIsWord())
+                if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
                 {
-                    if (hideHiddenWords || wordAtIndex.GetIsHidden() == false)
-                    {
-                        wordAtIndex.SetIsHidden(true);
+                    wordAtIndex.SetIsHidden(true);
 
-                        _wordsList[index] = wordAtIndex;
+                    _wordsList[index] = wordAtIndex;
 
-                        _visibleWordIndexes.RemoveAt(randomIndex);
-                    }
+                    _visibleWordIndexes.RemoveAt(randomIndex);
                 }
             }
         }
