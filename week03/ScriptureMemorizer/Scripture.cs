@@ -11,15 +11,17 @@ class Scripture
 
     public Scripture(string bookOfScriptureName, int chapterNumber, int verseNumber, string scriptureText)
     {
-        string scriptureReferenceText = $"{bookOfScriptureName} {chapterNumber}: {verseNumber}";
+        _scriptureReference = new ScriptureReference(bookOfScriptureName, chapterNumber, verseNumber);
+        _scriptureText = scriptureText;
         
-        SetScripture(scriptureReferenceText, scriptureText);
+        PopulateWordListForScriptureText(scriptureText);
     }
     public Scripture(string bookOfScriptureName, int chapterNumber, int startVerseNumber, int endVerseNumber, string scriptureText)
     {
-        string scriptureReferenceText = $"{bookOfScriptureName} {chapterNumber}: {startVerseNumber}-{endVerseNumber}";
+        _scriptureReference = new ScriptureReference(bookOfScriptureName, chapterNumber, startVerseNumber, endVerseNumber);
+        _scriptureText = scriptureText;
 
-        SetScripture(scriptureReferenceText, scriptureText);
+        PopulateWordListForScriptureText(scriptureText);
     }
 
     private void PopulateWordListForScriptureText(string scriptureText)
@@ -45,10 +47,8 @@ class Scripture
         }
     }
 
-    public void SetScripture(string scriptureReferenceText, string scriptureText)
+    public void SetScripture(ScriptureReference scriptureReference, string scriptureText)
     {
-        ScriptureReference scriptureReference = new ScriptureReference(scriptureReferenceText);
-
         _scriptureReference = scriptureReference;
         _scriptureText = scriptureText;
 
