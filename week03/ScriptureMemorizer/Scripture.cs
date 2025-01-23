@@ -29,10 +29,8 @@ class Scripture
         _visibleWordIndexes.Clear();
 
         int visibleIndex = 0;
-        
-        string regexPattern = @"[^A-Za-z]";
 
-        string[] tokens = Regex.Split(scriptureText, regexPattern); 
+        string[] tokens = scriptureText.Split(); 
         
         foreach (string token in tokens) 
         {
