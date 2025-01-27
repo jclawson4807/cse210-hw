@@ -41,6 +41,11 @@ class Program
 
     static void Main(string[] args)
     {
-        
+        PopulateVideoList();
+
+        foreach (Video video in _videoList)
+        {
+            video.DisplayVideoInformation();
+        }
     }
 }
