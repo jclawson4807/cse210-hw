@@ -23,6 +23,6 @@ public class Product
 
     public string GetProductLabelInformationForProduct()
     {
-        return $"{_productName} {_productId}";
+        return $"{_productName} {_productId}\n";
     }
 }

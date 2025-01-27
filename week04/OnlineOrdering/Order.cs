@@ -11,7 +11,7 @@ public class Order
 
         foreach (Product product in _productList)
         {
-            totalProductCost += product.GeTotalProductCost();
+            totalProductCost += product.GetTotalProductCost();
         }
 
         return totalProductCost;
@@ -43,7 +43,7 @@ public class Order
 
         foreach (Product product in _productList)
         {
-            
+            packingLabel += product.GetProductLabelInformationForProduct();
         }
 
         return packingLabel;
