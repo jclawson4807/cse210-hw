@@ -40,7 +40,7 @@ public class Video
 
         if (_commentList.Count > 0)
         {
-            Console.Write($"{_commentList.Count} Comment");
+            Console.Write($"\t{_commentList.Count} Comment");
 
             if (_commentList.Count > 1)
             {

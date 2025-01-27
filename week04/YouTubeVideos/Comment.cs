@@ -13,6 +13,6 @@ public class Comment
 
     public void DisplayComment()
     {
-        Console.WriteLine($"Comment Author: {_nameOfCommentAuthor}\nComment: {_commentText}");
+        Console.WriteLine($"\t\tComment Author: {_nameOfCommentAuthor}\n\t\tComment: {_commentText}\n");
     }
 }
