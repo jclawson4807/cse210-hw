@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 
 class Program
 {
@@ -20,11 +21,19 @@ class Program
         order2.AddProduct("LLQ 8Pcs Mini Lantern with LED Tealight, Ramadan Lanterns", "B09VKZQ5Y9", 26.99, 2);
 
         _orders.Add(order2);
-
     }
 
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the OnlineOrdering Project.");
+        Console.Clear();
+        
+        PopulateOrderList();
+
+        foreach (Order order in _orders)
+        {
+            Console.WriteLine(order.GetPackingLabel());
+            Console.WriteLine(order.GetShippingLabel());
+            Console.WriteLine($"\nTotal Order Price: {order.GetTotalOrderCost}\n\n");
+        }
     }
 }
