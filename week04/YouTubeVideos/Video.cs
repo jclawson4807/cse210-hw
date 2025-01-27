@@ -36,7 +36,7 @@ public class Video
 
     public void DisplayVideoInformation()
     {
-        Console.WriteLine($"Video Title: {_title}\n\tAuthor: {_author}\n\tLength (seconds) {_length}\n");
+        Console.WriteLine($"Video Title: {_title}\tAuthor: {_author}\tLength (seconds): {_length}\n");
 
         if (_commentList.Count > 0)
         {
