@@ -41,6 +41,8 @@ class Program
 
     static void Main(string[] args)
     {
+        Console.Clear();
+        
         PopulateVideoList();
 
         foreach (Video video in _videoList)
