@@ -1,9 +1,22 @@
 using System;
+using System.Security.Cryptography;
 
 public class Order
 {
     private Customer _customer;
     private List<Product> _productList = new List<Product>();
+
+    public Order(string customerName, string streetAddress, string city, string stateOrProvince, string country)
+    {
+        _customer = new Customer(customerName, streetAddress, city, stateOrProvince, country);
+    }
+
+    public void AddProduct(string productName, string productId, double price, int quantity)
+    {
+        Product product = new Product(productName, productId, price, quantity);
+
+        _productList.Add(product);
+    }
 
     private double GetTotalOrderProductCost()
     {
