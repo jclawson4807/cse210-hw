@@ -16,4 +16,14 @@ public class Order
 
         return totalOrderCost;
     }
+
+    public string GetPackingLabel()
+    {
+        return "";
+    }
+
+    public string GetShippingLabel()
+    {
+        return _customer.GetShippingLabel();
+    }
 }
