@@ -13,6 +13,6 @@ public class Assignment
 
     public string GetSummary()
     {
-        return $"Student Name: {_studentName} Topic: {_topic}";
+        return $"Student Name {_studentName} Topic {_topic}";
     }
 }
