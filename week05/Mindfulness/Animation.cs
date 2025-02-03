@@ -117,6 +117,53 @@ public class Animation
         spinnerCharacters.Add("▅");
         spinnerCharacters.Add("▄");
         spinnerCharacters.Add("▃");
+
+        int i = 0;
+        int c = spinnerCharacters.Count;
+
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(totalNumberOfSeconds);
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write(spinnerCharacters[i]);
+            Thread.Sleep(250);
+
+            if (progressiveSpinner)
+            {
+                Console.Write("\b  \b");
+            }
+            else
+            {
+                Console.Write("\b \b");
+            }
+
+            i++;
+
+            if (i >= c)
+            {
+                i = 0;
+            }
+        }
+    }
+
+    public void DisplayRightLeftBarSpinnerForCountdownTimer(int totalNumberOfSeconds, bool progressiveSpinner = false)
+    {
+        List<string> spinnerCharacters = new List<string>();
+
+        spinnerCharacters.Add("▉");
+        spinnerCharacters.Add("▊");
+        spinnerCharacters.Add("▋");
+        spinnerCharacters.Add("▌");
+        spinnerCharacters.Add("▍");
+        spinnerCharacters.Add("▎");
+        spinnerCharacters.Add("▏");
+        spinnerCharacters.Add("▎");
+        spinnerCharacters.Add("▍");
+        spinnerCharacters.Add("▌");
+        spinnerCharacters.Add("▋");
+        spinnerCharacters.Add("▊");
+        spinnerCharacters.Add("▉");
         
         int i = 0;
         int c = spinnerCharacters.Count;

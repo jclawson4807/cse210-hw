@@ -7,6 +7,6 @@ class Program
         Console.WriteLine("Hello World! This is the Mindfulness Project.");
 
         Animation animation = new Animation();
-        animation.DisplayLevelBarSpinnerForCountdownTimer(totalNumberOfSeconds: 30, progressiveSpinner: true);
+        animation.DisplayRightLeftBarSpinnerForCountdownTimer(totalNumberOfSeconds: 30, progressiveSpinner: true);
     }
 }
