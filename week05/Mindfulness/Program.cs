@@ -10,6 +10,7 @@ class Program
         // animation.DisplayCountdownTimer(totalNumberOfSeconds: 11);
         // animation.DisplayProgressiveCountdownTimer(totalNumberOfSeconds: 30);
         // animation.DisplayArrowSpinnerForCountdownTimer(totalNumberOfSeconds: 30, progressiveSpinner: true);
-        animation.DisplayLevelSpinnerForCountdownTimer(totalNumberOfSeconds: 30, progressiveSpinner: true);
+        // animation.DisplayLevelSpinnerForCountdownTimer(totalNumberOfSeconds: 30, progressiveSpinner: true);
+        animation.DisplayShruggingForCountdownTimer(totalNumberOfSeconds: 30);
     }
 }

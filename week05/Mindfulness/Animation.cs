@@ -117,4 +117,48 @@ public class Animation
             }
         }
     }
+
+    public void DisplayShruggingForCountdownTimer(int totalNumberOfSeconds)
+    {
+        List<string> spinnerCharacters = new List<string>();
+
+        spinnerCharacters.Add("¯\\_(ツ)_/¯");
+        spinnerCharacters.Add("¯\\_(ツ)_--");
+        spinnerCharacters.Add("¯\\_(ツ)__-");
+        spinnerCharacters.Add("¯\\_(ツ)___");
+        spinnerCharacters.Add("--_(ツ)___");
+        spinnerCharacters.Add("-__(ツ)___");
+        spinnerCharacters.Add("___(ツ)___");
+        spinnerCharacters.Add("___(\"\")___");
+        spinnerCharacters.Add("___(\";)___");
+        spinnerCharacters.Add("___(ツ)___");
+        spinnerCharacters.Add("___(ツ)_--");
+        spinnerCharacters.Add("___(ツ)_/¯");
+        spinnerCharacters.Add("--_(ツ)_/¯");
+        spinnerCharacters.Add("¯\\_(ツ)_/¯");
+        spinnerCharacters.Add("--_(ツ)_--");
+        spinnerCharacters.Add("___(ツ)___");
+        spinnerCharacters.Add("--_(ツ)_--");
+
+        int i = 0;
+        int c = spinnerCharacters.Count;
+
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(totalNumberOfSeconds);
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write(spinnerCharacters[i]);
+            Thread.Sleep(1000);
+
+            Console.Write("\b\b\b\b\b\b\b\b\b        \b\b\b\b\b\b\b\b\b");
+
+            i++;
+
+            if (i >= c)
+            {
+                i = 0;
+            }
+        }
+    }
 }
