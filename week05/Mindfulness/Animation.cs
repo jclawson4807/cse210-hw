@@ -16,7 +16,7 @@ public class Animation
             }
             else
             {
-                Console.Write("\b  \b");
+                Console.Write("\b \b");
             }
         }
     }
