@@ -16,6 +16,46 @@ public class Activity
         _howLongInSectionsMessage = "How long, in sections, would you like for your session?";
     }
 
+    public void SetActivityName(string activityName)
+    {
+        _activityName = activityName;
+    }
+
+    public string GetActivityName()
+    {
+        return _activityName;
+    }
+
+    public void SetWelcomeMessage(string welcomeMessage)
+    {
+        _welcomeMessage = welcomeMessage;
+    }
+
+    public string GetWelcomeMessage()
+    {
+        return _welcomeMessage;
+    }
+
+    public void SetActivityDescriptionMessage(string activityDescriptionMessage)
+    {
+        _activityDescriptionMessage = activityDescriptionMessage;
+    }
+
+    public string GetActivityDescriptionMessage()
+    {
+        return _activityDescriptionMessage;
+    }
+
+    public void SetHowLongMessage(string howLongInSectionsMessage)
+    {
+        _howLongInSectionsMessage = howLongInSectionsMessage;
+    }
+
+    public string GetHowLongMessage()
+    {
+        return _howLongInSectionsMessage;
+    }
+
     public void DisplayStartMenu()
     {
         Console.Clear();
