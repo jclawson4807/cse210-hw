@@ -8,5 +8,6 @@ class Program
 
         Animation animation = new Animation();
         animation.DisplayCountdownTimer(totalNumberOfSeconds: 11);
+        animation.DisplayProgressiveCountdownTimer(totalNumberOfSeconds: 30);
     }
 }
