@@ -76,4 +76,45 @@ public class Animation
             }
         }
     }
+
+    public void DisplayLevelSpinnerForCountdownTimer(int totalNumberOfSeconds, bool progressiveSpinner = true, bool eraseProgress = true)
+    {
+        List<string> spinnerCharacters = new List<string>();
+
+        spinnerCharacters.Add("_");
+        spinnerCharacters.Add("-");
+        spinnerCharacters.Add("¯");
+        spinnerCharacters.Add("-");
+
+        int i = 0;
+        int c = spinnerCharacters.Count;
+
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(totalNumberOfSeconds);
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write(spinnerCharacters[i]);
+            Thread.Sleep(1000);
+
+            if (eraseProgress)
+            {
+                if (progressiveSpinner)
+                {
+                    Console.Write("\b  \b");
+                }
+                else
+                {
+                    Console.Write("\b \b");
+                }
+            }
+
+            i++;
+
+            if (i >= c)
+            {
+                i = 0;
+            }
+        }
+    }
 }
