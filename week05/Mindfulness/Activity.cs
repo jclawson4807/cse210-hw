@@ -82,6 +82,16 @@ public class Activity
                 ReflectingActivity reflectingActivity = new ReflectingActivity();
                 reflectingActivity.DisplayActivityMenu();
             }
+            else if (menuOptionInt == 3)
+            {
+                ListingActivity listingActivity = new ListingActivity();
+                listingActivity.DisplayActivityMenu();
+            }
+            else if (menuOptionInt == 4)
+            {
+                Console.WriteLine("Quitting Mindfulness Program.  Good Bye.");
+                System.Environment.Exit(1);
+            }
             else
             {
                 DisplayActivityMenu();
