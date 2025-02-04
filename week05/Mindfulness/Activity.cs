@@ -71,6 +71,8 @@ public class Activity
         try
         {
             int menuOptionInt = int.Parse(menuOptionString);
+
+            DisplayActivityMenu();
         }
         catch (Exception e)
         {
@@ -79,6 +81,30 @@ public class Activity
             Thread.Sleep(2000);
 
             DisplayStartMenu();
+        }
+
+    }
+
+    public void DisplayActivityMenu()
+    {
+        Console.Clear();
+        Console.WriteLine($"{_welcomeMessage}\n");
+        Console.WriteLine($"{_activityDescriptionMessage}\n");
+        Console.Write($"{_howLongInSectionsMessage}"); 
+
+        string howLongString = Console.ReadLine();
+
+        try
+        {
+            int howLongInt = int.Parse(howLongString);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: You must enter a postive, non zero integer value. ({e})");
+
+            Thread.Sleep(2000);
+
+            DisplayActivityMenu();
         }
 
     }
