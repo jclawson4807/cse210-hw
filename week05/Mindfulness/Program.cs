@@ -4,9 +4,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Mindfulness Project.");
+        Activity activity = new Activity();
+        activity.DisplayStartMenu();
 
-        Animation animation = new Animation();
-        animation.DisplayRightLeftBarSpinnerForCountdownTimer(totalNumberOfSeconds: 30, progressiveSpinner: true);
+        // Animation animation = new Animation();
+        // animation.DisplayRightLeftBarSpinnerForCountdownTimer(totalNumberOfSeconds: 30, progressiveSpinner: true);
     }
 }

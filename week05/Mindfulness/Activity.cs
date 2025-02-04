@@ -60,10 +60,10 @@ public class Activity
     {
         Console.Clear();
         Console.WriteLine("Menu Options:");
-        Console.WriteLine("\t1. Start breathing activity");    
-        Console.WriteLine("\t2. Start reflecting activity");  
-        Console.WriteLine("\t3. Start listing activity");  
-        Console.WriteLine("\t4. Quit"); 
+        Console.WriteLine(" 1. Start breathing activity");    
+        Console.WriteLine(" 2. Start reflecting activity");  
+        Console.WriteLine(" 3. Start listing activity");  
+        Console.WriteLine(" 4. Quit"); 
         Console.Write("Select a choice from the menu: ");  
 
         string menuOptionString = Console.ReadLine();
@@ -90,7 +90,7 @@ public class Activity
         Console.Clear();
         Console.WriteLine($"{_welcomeMessage}\n");
         Console.WriteLine($"{_activityDescriptionMessage}\n");
-        Console.Write($"{_howLongInSectionsMessage}"); 
+        Console.Write($"{_howLongInSectionsMessage} "); 
 
         string howLongString = Console.ReadLine();
 
