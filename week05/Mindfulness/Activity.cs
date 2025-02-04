@@ -7,6 +7,14 @@ public class Activity
     private string _welcomeMessage;
     private string _activityDescriptionMessage;
     private string _howLongInSectionsMessage;
+    private string _afterActivityMessage;
+
+    private int _pauseDurationInSeconds = 4;
+
+    private int _activityDurationInSeconds = 0;
+
+    private Animation _animation = new Animation();
+    Random _random = new Random();
 
     public Activity()
     {
@@ -14,6 +22,7 @@ public class Activity
         _welcomeMessage = "Welcome to the base activity.";
         _activityDescriptionMessage = "This is the base activity message, and is a placeholder.";
         _howLongInSectionsMessage = "How long, in sections, would you like for your session?";
+        _afterActivityMessage = "You have completed the base activity.  Well done.";
     }
 
     public void SetActivityName(string activityName)
@@ -54,6 +63,16 @@ public class Activity
     public string GetHowLongMessage()
     {
         return _howLongInSectionsMessage;
+    }
+
+    public void SetAfterActivityMessage(string afterActivityMessage)
+    {
+        _afterActivityMessage = afterActivityMessage;
+    }
+
+    public string GetAfterActivityMessage()
+    {
+        return _afterActivityMessage;
     }
 
     public void DisplayStartMenu()
@@ -120,7 +139,11 @@ public class Activity
 
         try
         {
-            int howLongInt = int.Parse(howLongString);
+            _activityDurationInSeconds = int.Parse(howLongString);
+
+            int spinnerType = _random.Next(1, 8);
+
+            DisplayActivityStartMessage("Get Ready...", spinnerType);
         }
         catch (Exception e)
         {
@@ -130,6 +153,42 @@ public class Activity
 
             DisplayActivityMenu();
         }
+    }
 
+    public bool DisplayActivityStartMessage(string startMessage, int spinnerType, bool progressiveSpinner = false, bool eraseProgress = true)
+    {
+        Console.Clear();
+        Console.WriteLine(startMessage);
+
+        if (spinnerType == 1)
+        {
+            _animation.DisplayArrowSpinnerForCountdownTimer(totalNumberOfSeconds: _pauseDurationInSeconds, progressiveSpinner: progressiveSpinner);
+        }
+        else if (spinnerType == 2)
+        {
+            _animation.DisplayDirectionalArrowSpinnerForCountdownTimer(totalNumberOfSeconds: _pauseDurationInSeconds, progressiveSpinner: progressiveSpinner);
+        }
+        else if (spinnerType == 3)
+        {
+            _animation.DisplayLevelBarSpinnerForCountdownTimer(totalNumberOfSeconds: _pauseDurationInSeconds, progressiveSpinner: progressiveSpinner);
+        }
+        else if (spinnerType == 4)
+        {
+            _animation.DisplayRightLeftBarSpinnerForCountdownTimer(totalNumberOfSeconds: _pauseDurationInSeconds, progressiveSpinner: progressiveSpinner);
+        }
+        else if (spinnerType == 5)
+        {
+            _animation.DisplayLevelSpinnerForCountdownTimer(totalNumberOfSeconds: _pauseDurationInSeconds, progressiveSpinner: progressiveSpinner, eraseProgress: eraseProgress);
+        }
+        else if (spinnerType == 6)
+        {
+            _animation.DisplayShruggingForCountdownTimer(totalNumberOfSeconds: _pauseDurationInSeconds);
+        }
+        else if (spinnerType == 7)
+        {
+            _animation.DisplayDefaultSpinnerForCountdownTimer(totalNumberOfSeconds: _pauseDurationInSeconds, progressiveSpinner: progressiveSpinner);
+        }
+
+        return true;
     }
 }

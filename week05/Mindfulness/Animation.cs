@@ -21,6 +21,44 @@ public class Animation
         }
     }
 
+    public void DisplayDefaultSpinnerForCountdownTimer(int totalNumberOfSeconds, bool progressiveSpinner = false)
+    {
+        List<string> spinnerCharacters = new List<string>();
+
+        spinnerCharacters.Add("|");
+        spinnerCharacters.Add("/");
+        spinnerCharacters.Add("_");
+        spinnerCharacters.Add("\\");
+
+        int i = 0;
+        int c = spinnerCharacters.Count;
+
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(totalNumberOfSeconds);
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write(spinnerCharacters[i]);
+            Thread.Sleep(500);
+
+            if (progressiveSpinner)
+            {
+                Console.Write("\b  \b");
+            }
+            else
+            {
+                Console.Write("\b \b");
+            }
+
+            i++;
+
+            if (i >= c)
+            {
+                i = 0;
+            }
+        }
+    }
+
     public void DisplayArrowSpinnerForCountdownTimer(int totalNumberOfSeconds, bool progressiveSpinner = false)
     {
         List<string> spinnerCharacters = new List<string>();
