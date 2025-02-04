@@ -72,7 +72,16 @@ public class Activity
         {
             int menuOptionInt = int.Parse(menuOptionString);
 
-            DisplayActivityMenu();
+            if (menuOptionInt == 1)
+            {
+                BreathingActivity breathingActivity = new BreathingActivity();
+                breathingActivity.DisplayActivityMenu();
+            }
+            else
+            {
+                DisplayActivityMenu();
+            }
+            
         }
         catch (Exception e)
         {
