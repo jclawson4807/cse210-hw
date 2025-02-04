@@ -77,6 +77,11 @@ public class Activity
                 BreathingActivity breathingActivity = new BreathingActivity();
                 breathingActivity.DisplayActivityMenu();
             }
+            else if (menuOptionInt == 2)
+            {
+                ReflectingActivity reflectingActivity = new ReflectingActivity();
+                reflectingActivity.DisplayActivityMenu();
+            }
             else
             {
                 DisplayActivityMenu();
