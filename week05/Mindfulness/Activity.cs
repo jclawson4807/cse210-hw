@@ -98,17 +98,17 @@ public class Activity
             if (menuOptionInt == 1)
             {
                 BreathingActivity breathingActivity = new BreathingActivity();
-                breathingActivity.DisplayActivityMenu();
+                breathingActivity.DisplayActivityMenu(menuOptionInt);
             }
             else if (menuOptionInt == 2)
             {
                 ReflectingActivity reflectingActivity = new ReflectingActivity();
-                reflectingActivity.DisplayActivityMenu();
+                reflectingActivity.DisplayActivityMenu(menuOptionInt);
             }
             else if (menuOptionInt == 3)
             {
                 ListingActivity listingActivity = new ListingActivity();
-                listingActivity.DisplayActivityMenu();
+                listingActivity.DisplayActivityMenu(menuOptionInt);
             }
             else if (menuOptionInt == 4)
             {
@@ -117,7 +117,7 @@ public class Activity
             }
             else
             {
-                DisplayActivityMenu();
+                DisplayActivityMenu(menuOptionInt);
             }
             
         }
@@ -132,7 +132,7 @@ public class Activity
 
     }
 
-    public void DisplayActivityMenu()
+    public void DisplayActivityMenu(int activityTypeID)
     {
         Console.Clear();
         Console.WriteLine($"{_welcomeMessage}\n");
@@ -147,7 +147,7 @@ public class Activity
 
             int spinnerType = _random.Next(1, 8);
 
-            DisplayActivityStartMessage("Get Ready...", spinnerType);
+            DisplayActivityStartMessage(activityTypeID, "Get Ready...", spinnerType);
         }
         catch (Exception e)
         {
@@ -155,11 +155,11 @@ public class Activity
 
             Thread.Sleep(2000);
 
-            DisplayActivityMenu();
+            DisplayActivityMenu(activityTypeID);
         }
     }
 
-    public bool DisplayActivityStartMessage(string startMessage, int spinnerType, bool progressiveSpinner = false, bool eraseProgress = true)
+    public bool DisplayActivityStartMessage(int activityType, string startMessage, int spinnerType, bool progressiveSpinner = false, bool eraseProgress = true)
     {
         Console.Clear();
         Console.WriteLine(startMessage);
