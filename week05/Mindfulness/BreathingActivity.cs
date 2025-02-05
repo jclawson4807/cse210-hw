@@ -22,8 +22,8 @@ public class BreathingActivity: Activity
 
     public bool MindfulnessActivity()
     {
-        Console.WriteLine("Begin Breathing Activity");
-        Console.WriteLine(GetActivityDurationInSeconds());
+        Console.WriteLine("");
+        Console.WriteLine("");
 
         Animation animation = GetAnimation();
         

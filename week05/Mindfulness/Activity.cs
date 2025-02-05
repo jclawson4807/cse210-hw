@@ -12,7 +12,7 @@ public class Activity
 
     private int _pauseDurationInSeconds = 4;
 
-    private int _activityDurationInSeconds = 0;
+    private int _activityDurationInSeconds;
 
     private Animation _animation = new Animation();
     Random _random = new Random();
@@ -89,6 +89,11 @@ public class Activity
         return _activityDurationInSeconds;
     }
 
+    public void SetActivityDurationInSeconds(int activityDurationInSeconds)
+    {
+        _activityDurationInSeconds = activityDurationInSeconds;
+    }
+
     public void DisplayStartMenu()
     {
         Console.Clear();
@@ -153,13 +158,11 @@ public class Activity
 
         try
         {
-            Console.WriteLine(howLongString);
-
             _activityDurationInSeconds = int.Parse(howLongString);
 
             int spinnerType = _random.Next(1, 8);
 
-            DisplayActivityStartMessage(activityTypeID, "Get Ready...", spinnerType);
+            DisplayActivityStartMessage(activityTypeID, _activityDurationInSeconds, "Get Ready...", spinnerType);
         }
         catch (Exception e)
         {
@@ -171,7 +174,7 @@ public class Activity
         }
     }
 
-    public bool DisplayActivityStartMessage(int activityType, string startMessage, int spinnerType, bool progressiveSpinner = false, bool eraseProgress = true)
+    public bool DisplayActivityStartMessage(int activityType, int activityDurationInSeconds, string startMessage, int spinnerType, bool progressiveSpinner = false, bool eraseProgress = true)
     {
         Console.Clear();
         Console.WriteLine(startMessage);
@@ -208,7 +211,7 @@ public class Activity
         if (activityType == 1)
         {
             BreathingActivity breathingActivity = new BreathingActivity();
-
+            breathingActivity.SetActivityDurationInSeconds(activityDurationInSeconds);
             breathingActivity.MindfulnessActivity();
         }
 
