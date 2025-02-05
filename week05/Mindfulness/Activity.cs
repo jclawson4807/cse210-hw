@@ -33,6 +33,11 @@ public class Activity
         return _animation;
     }
 
+    public Random GetRandom()
+    {
+        return _random;
+    }
+
     public void SetActivityName(string activityName)
     {
         _activityName = activityName;
