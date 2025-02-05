@@ -36,7 +36,7 @@ public class BreathingActivity: Activity
             animation.DisplayCountdownTimer(_breatheInDuration);
             Console.WriteLine("");
             
-            Console.Write("Breathe out...");
+            Console.Write("Now breathe out...");
             animation.DisplayCountdownTimer(_breatheOutDuration);
             Console.WriteLine("\n\n");
         }
