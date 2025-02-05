@@ -28,6 +28,11 @@ public class Activity
 
     }
 
+    public Animation GetAnimation()
+    {
+        return _animation;
+    }
+
     public void SetActivityName(string activityName)
     {
         _activityName = activityName;
@@ -77,6 +82,11 @@ public class Activity
     public string GetAfterActivityMessage()
     {
         return $"{_afterActivityMessagePart1}{_activityDurationInSeconds}{_afterActivityMessagePart2}";
+    }
+
+    public int GetActivityDurationInSeconds()
+    {
+        return _activityDurationInSeconds;
     }
 
     public void DisplayStartMenu()
@@ -143,6 +153,8 @@ public class Activity
 
         try
         {
+            Console.WriteLine(howLongString);
+
             _activityDurationInSeconds = int.Parse(howLongString);
 
             int spinnerType = _random.Next(1, 8);
@@ -192,6 +204,21 @@ public class Activity
         {
             _animation.DisplayDefaultSpinnerForCountdownTimer(totalNumberOfSeconds: _pauseDurationInSeconds, progressiveSpinner: progressiveSpinner);
         }
+
+        if (activityType == 1)
+        {
+            BreathingActivity breathingActivity = new BreathingActivity();
+
+            breathingActivity.MindfulnessActivity();
+        }
+
+
+        return true;
+    }
+
+    public virtual bool MindfulnessActivity()
+    {
+        Console.WriteLine("Base activity");
 
         return true;
     }
