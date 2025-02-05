@@ -41,7 +41,7 @@ public class ReflectingActivity: Activity
 
         Console.WriteLine(_reflectionQuestions[random.Next(0, _reflectionQuestions.Count)]);
 
-        Console.WriteLine("\nWhen you have something in mind, press enter to continue./n");
+        Console.WriteLine("\nWhen you have something in mind, press enter to continue.\n");
 
         string userResponseString = Console.ReadLine();
 
