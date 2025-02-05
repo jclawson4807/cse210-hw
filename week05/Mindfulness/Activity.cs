@@ -219,6 +219,12 @@ public class Activity
             breathingActivity.SetActivityDurationInSeconds(activityDurationInSeconds);
             breathingActivity.MindfulnessActivity();
         }
+        else if (activityType == 2)
+        {
+            ReflectingActivity reflectingActivity = new ReflectingActivity();
+            reflectingActivity.SetActivityDurationInSeconds(activityDurationInSeconds);
+            reflectingActivity.MindfulnessActivity();
+        }
 
 
         return true;
