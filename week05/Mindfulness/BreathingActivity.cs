@@ -11,7 +11,7 @@ public class BreathingActivity: Activity
         SetWelcomeMessage("Welcome to the Breathing Activity.");
         SetActivityDescriptionMessage("This activity will help you relax by walking you through breathing in and out slowly.  Clear your mind and focus on your breathing.");
         SetHowLongMessage("How long, in sections, would you like for your session?");
-        SetAfterActivityMessage("You have completed another ", "seconds of the Breathing Activity.  Good job!");
+        SetAfterActivityMessage("You have completed another ", " seconds of the Breathing Activity.  Good job!");
     }
 
     public void SetBreatheDuration(int breatheInDuration, int breatheOutDuration)
@@ -20,7 +20,7 @@ public class BreathingActivity: Activity
         _breatheOutDuration = breatheOutDuration;
     }
 
-    public bool MindfulnessActivity()
+    public void MindfulnessActivity()
     {
         Console.WriteLine("");
         Console.WriteLine("");
@@ -41,6 +41,14 @@ public class BreathingActivity: Activity
             Console.WriteLine("\n\n");
         }
 
-        return true;
+        Console.WriteLine("Well done!!");
+        animation.DisplayDefaultSpinnerForCountdownTimer(4, false);
+        Console.WriteLine("\n\n");
+
+        Console.WriteLine(GetAfterActivityMessage());
+
+        Thread.Sleep(2000);
+
+        DisplayStartMenu();
     }
 }

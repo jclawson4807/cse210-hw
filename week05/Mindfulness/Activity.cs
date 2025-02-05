@@ -219,10 +219,8 @@ public class Activity
         return true;
     }
 
-    public virtual bool MindfulnessActivity()
+    public virtual void MindfulnessActivity()
     {
         Console.WriteLine("Base activity");
-
-        return true;
     }
 }
