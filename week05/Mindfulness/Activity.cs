@@ -6,8 +6,9 @@ public class Activity
     private string _activityName;
     private string _welcomeMessage;
     private string _activityDescriptionMessage;
-    private string _howLongInSectionsMessage;
-    private string _afterActivityMessage;
+    private string _howLongInSecondsMessage;
+    private string _afterActivityMessagePart1;
+    private string _afterActivityMessagePart2;
 
     private int _pauseDurationInSeconds = 4;
 
@@ -21,8 +22,10 @@ public class Activity
         _activityName = "Base";
         _welcomeMessage = "Welcome to the base activity.";
         _activityDescriptionMessage = "This is the base activity message, and is a placeholder.";
-        _howLongInSectionsMessage = "How long, in sections, would you like for your session?";
-        _afterActivityMessage = "You have completed the base activity.  Well done.";
+        _howLongInSecondsMessage = "How long, in seconds, would you like for your session?";
+        _afterActivityMessagePart1 = "You have completed another ";
+        _afterActivityMessagePart2 = " seconds of the base activity.  Good job!";
+
     }
 
     public void SetActivityName(string activityName)
@@ -55,24 +58,25 @@ public class Activity
         return _activityDescriptionMessage;
     }
 
-    public void SetHowLongMessage(string howLongInSectionsMessage)
+    public void SetHowLongMessage(string howLongInSecondsMessage)
     {
-        _howLongInSectionsMessage = howLongInSectionsMessage;
+        _howLongInSecondsMessage = howLongInSecondsMessage;
     }
 
     public string GetHowLongMessage()
     {
-        return _howLongInSectionsMessage;
+        return _howLongInSecondsMessage;
     }
 
-    public void SetAfterActivityMessage(string afterActivityMessage)
+    public void SetAfterActivityMessage(string afterActivityMessagePart1, string afterActivityMessagePart2)
     {
-        _afterActivityMessage = afterActivityMessage;
+        _afterActivityMessagePart1 = afterActivityMessagePart1;
+        _afterActivityMessagePart2 = afterActivityMessagePart2;
     }
 
     public string GetAfterActivityMessage()
     {
-        return _afterActivityMessage;
+        return $"{_afterActivityMessagePart1}{_activityDurationInSeconds}{_afterActivityMessagePart2}";
     }
 
     public void DisplayStartMenu()
@@ -133,7 +137,7 @@ public class Activity
         Console.Clear();
         Console.WriteLine($"{_welcomeMessage}\n");
         Console.WriteLine($"{_activityDescriptionMessage}\n");
-        Console.Write($"{_howLongInSectionsMessage} "); 
+        Console.Write($"{_howLongInSecondsMessage} "); 
 
         string howLongString = Console.ReadLine();
 
