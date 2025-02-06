@@ -99,6 +99,26 @@ public class Activity
         _activityDurationInSeconds = activityDurationInSeconds;
     }
 
+    public int GetPauseDurationInSeconds()
+    {
+        return _pauseDurationInSeconds;
+    }
+
+    public int GetHalfPauseDurationInSeconds()
+    {
+        return _pauseDurationInSeconds / 2;
+    }
+
+    public int GetMultipleOfPauseDurationInSeconds(int multiplier = 4)
+    {
+        if (multiplier < 1)
+        {
+            multiplier = 4;    
+        }
+        
+        return _pauseDurationInSeconds * multiplier;
+    }
+
     public void DisplayStartMenu()
     {
         Console.Clear();
