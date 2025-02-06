@@ -82,12 +82,11 @@ public class ReflectingActivity: Activity
         }
 
         Console.WriteLine("Well done!!");
-        animation.DisplayDefaultSpinnerForCountdownTimer(4, false);
         Console.WriteLine("\n\n");
+        Thread.Sleep(2000);
 
         Console.WriteLine(GetAfterActivityMessage());
-
-        Thread.Sleep(2000);
+        animation.DisplayDefaultSpinnerForCountdownTimer(4, false);
 
         DisplayStartMenu();
     }
