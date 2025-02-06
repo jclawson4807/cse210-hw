@@ -245,7 +245,12 @@ public class Activity
             reflectingActivity.SetActivityDurationInSeconds(activityDurationInSeconds);
             reflectingActivity.MindfulnessActivity();
         }
-
+        else if (activityType == 3)
+        {
+            ListingActivity listingActivity = new ListingActivity();
+            listingActivity.SetActivityDurationInSeconds(activityDurationInSeconds);
+            listingActivity.MindfulnessActivity();
+        }
 
         return true;
     }
