@@ -126,8 +126,9 @@ public class Activity
         Console.WriteLine(" 1. Start breathing activity");    
         Console.WriteLine(" 2. Start reflecting activity");  
         Console.WriteLine(" 3. Start listing activity");
-        Console.WriteLine(" 4. Start gratitude activity");  
-        Console.WriteLine(" 5. Quit"); 
+        Console.WriteLine(" 4. Start gratitude activity");
+        Console.WriteLine(" 5. Start the clear your mind activity");  
+        Console.WriteLine(" 6. Quit"); 
         Console.Write("Select a choice from the menu: ");  
 
         string menuOptionString = Console.ReadLine();
@@ -157,6 +158,11 @@ public class Activity
                 gratitudeActivity.DisplayActivityMenu(menuOptionInt);
             }
             else if (menuOptionInt == 5)
+            {
+                ClosedEyesActivity closedEyesActivity = new ClosedEyesActivity();
+                closedEyesActivity.DisplayActivityMenu(menuOptionInt);
+            }
+            else if (menuOptionInt == 6)
             {
                 Console.WriteLine("Quitting Mindfulness Program.  Good Bye.");
                 System.Environment.Exit(1);
@@ -262,6 +268,12 @@ public class Activity
             GratitudeActivity gratitudeActivity = new GratitudeActivity();
             gratitudeActivity.SetActivityDurationInSeconds(activityDurationInSeconds);
             gratitudeActivity.MindfulnessActivity();
+        }
+        else if (activityType == 5)
+        {
+            ClosedEyesActivity closedEyesActivity = new ClosedEyesActivity();
+            closedEyesActivity.SetActivityDurationInSeconds(activityDurationInSeconds);
+            closedEyesActivity.MindfulnessActivity();
         }
 
         return true;
