@@ -175,7 +175,7 @@ public class Activity
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Exception: You must enter an integer value from 1 to 4.  ({e})");
+            Console.WriteLine($"Exception in {_activityName}: You must enter an integer value from 1 to 4.  ({e})");
 
             Thread.Sleep(2000);
 
@@ -203,7 +203,7 @@ public class Activity
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Exception: You must enter a positive, non zero integer value. ({e})");
+            Console.WriteLine($"Exception in {_activityName}: You must enter a positive, non zero integer value. ({e})");
 
             Thread.Sleep(2000);
 
