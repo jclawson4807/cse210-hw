@@ -42,6 +42,8 @@ public class ReflectingActivity: Activity
 
     public void MindfulnessActivity()
     {
+        Console.Clear();
+        
         PopulatePromptQuestions();
         PopulateReflectionQuestions();
 
@@ -63,6 +65,8 @@ public class ReflectingActivity: Activity
         string userResponseString = Console.ReadLine();
 
         Console.WriteLine("Now ponder each of the following questions as they related to this experience.\n");
+
+        Console.Clear();
 
         while (DateTime.Now < endTime)
         {
