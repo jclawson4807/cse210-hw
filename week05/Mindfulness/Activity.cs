@@ -197,7 +197,7 @@ public class Activity
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Exception: You must enter a postive, non zero integer value. ({e})");
+            Console.WriteLine($"Exception: You must enter a positive, non zero integer value. ({e})");
 
             Thread.Sleep(2000);
 
