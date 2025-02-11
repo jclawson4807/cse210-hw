@@ -12,7 +12,7 @@ public class SimpleGoal : Goal
         Console.WriteLine("Created Simple Goal");
     }
 
-    public Goal DisplayCreateGoalMenu()
+    public override SimpleGoal DisplayCreateGoalMenu()
     {
         Console.Clear();
         Console.Write("What is the name of your goal? ");
@@ -24,25 +24,14 @@ public class SimpleGoal : Goal
         Console.Write("\nWhat is the amount of points associated with this goal? ");
         string numberOfPoints = Console.ReadLine();
 
-        try
-        {
-            points = int.Parse(numberOfPoints);
+        int points = int.Parse(numberOfPoints);
 
-            SimpleGoal simpleGoal = new SimpleGoal(title: title, description: description, points: points);
+        SimpleGoal simpleGoal = new SimpleGoal(title: title, description: description, points: points);
 
-            return SimpleGoal;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Exception in {GetGoalType()}: You must enter a positive, non zero integer value. ({e})");
-
-            Thread.Sleep(2000);
-
-            DisplayCreateGoalMenu();
-        }
+        return simpleGoal;
     }
 
-    public string GetGoalDisplayString()
+    public override string GetGoalDisplayString()
     {
         string goalDisplayString = "[";
 
@@ -55,6 +44,8 @@ public class SimpleGoal : Goal
             goalDisplayString += " ";    
         }
 
-        goalDisplayString = $"{goalDisplayString} {GetTitle()} ({GetDescription()})"; 
+        goalDisplayString = $"{goalDisplayString}] {GetTitle()} ({GetDescription()})"; 
+
+        return goalDisplayString;
     }
 }
