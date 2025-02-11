@@ -4,6 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Shapes Project.");
+        Square square = new Square(color: "blue", side: 2.7);
+
+        Console.WriteLine(square.GetArea());
     }
 }
