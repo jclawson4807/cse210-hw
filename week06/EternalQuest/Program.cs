@@ -11,5 +11,12 @@ class Program
         simpleGoal = simpleGoal.DisplayCreateGoalMenu();
 
         Console.WriteLine(simpleGoal.GetGoalDisplayString());
+
+        EternalGoal eternalGoal = new EternalGoal();
+
+        eternalGoal = eternalGoal.DisplayCreateGoalMenu();
+
+        Console.WriteLine(eternalGoal.GetGoalDisplayString());
+
     }
 }

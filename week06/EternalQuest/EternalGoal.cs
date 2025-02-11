@@ -33,7 +33,7 @@ public class EternalGoal : Goal
 
     public override string GetGoalDisplayString()
     {
-        string goalDisplayString = $"[ ] {goalDisplayString}] {GetTitle()} ({GetDescription()})"; 
+        string goalDisplayString = $"[ ] {GetTitle()} ({GetDescription()})"; 
 
         return goalDisplayString;
     }
