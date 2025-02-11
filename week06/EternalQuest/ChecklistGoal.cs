@@ -75,7 +75,7 @@ public class ChecklistGoal : Goal
             goalDisplayString += " ";    
         }
 
-        goalDisplayString = $"{goalDisplayString}] {GetTitle()} ({GetDescription()} -- Currently completed: {GetNumberOfTimesCompleted()}/{GetNumberOfCompletionsNeededForBonus()})"; 
+        goalDisplayString = $"{goalDisplayString}] {GetTitle()} ({GetDescription()}) -- Currently completed: {GetNumberOfTimesCompleted()}/{GetNumberOfCompletionsNeededForBonus()}"; 
 
         return goalDisplayString;
     }

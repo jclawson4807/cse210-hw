@@ -6,17 +6,23 @@ class Program
     {
         Console.WriteLine("Hello World! This is the EternalQuest Project.");
 
-        SimpleGoal simpleGoal = new SimpleGoal();
+        // SimpleGoal simpleGoal = new SimpleGoal();
 
-        simpleGoal = simpleGoal.DisplayCreateGoalMenu();
+        // simpleGoal = simpleGoal.DisplayCreateGoalMenu();
 
-        Console.WriteLine(simpleGoal.GetGoalDisplayString());
+        // Console.WriteLine(simpleGoal.GetGoalDisplayString());
 
-        EternalGoal eternalGoal = new EternalGoal();
+        // EternalGoal eternalGoal = new EternalGoal();
 
-        eternalGoal = eternalGoal.DisplayCreateGoalMenu();
+        // eternalGoal = eternalGoal.DisplayCreateGoalMenu();
 
-        Console.WriteLine(eternalGoal.GetGoalDisplayString());
+        // Console.WriteLine(eternalGoal.GetGoalDisplayString());
+
+        ChecklistGoal checklistGoal = new ChecklistGoal();
+
+        checklistGoal = checklistGoal.DisplayCreateGoalMenu();
+
+        Console.WriteLine(checklistGoal.GetGoalDisplayString());
 
     }
 }
