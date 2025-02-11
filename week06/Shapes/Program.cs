@@ -8,8 +8,14 @@ class Program
         Rectangle rectangle = new Rectangle(color: "Green", length: 2.7, width: 7.2);
         Circle circle = new Circle(color: "Green", radius: 2.7);
 
-        Console.WriteLine($"Square {square.GetColor()} {square.GetArea()}");
-        Console.WriteLine($"Rectangle {rectangle.GetColor()} {rectangle.GetArea()}");
-        Console.WriteLine($"Circle {circle.GetColor()} {circle.GetArea()}");
+        List<Shape> shapes = new List<Shape>();
+        shapes.Add(square);
+        shapes.Add(rectangle);
+        shapes.Add(circle);
+
+        foreach (Shape shape in shapes)
+        {
+            Console.WriteLine($"{shape.GetColor()} {shape.GetArea()}");
+        }
     }
 }
