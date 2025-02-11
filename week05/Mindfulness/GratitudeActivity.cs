@@ -13,7 +13,7 @@ public class GratitudeActivity: Activity
         SetAfterActivityMessage("You have completed another ", " seconds of the Gratitude Activity.  Good job!");
     }
 
-    public void MindfulnessActivity()
+    public override void MindfulnessActivity()
     {
         Console.Clear();
         _responses.Clear();

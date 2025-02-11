@@ -40,7 +40,7 @@ public class ReflectingActivity: Activity
         SetAfterActivityMessage("You have completed another ", " seconds of the Reflecting Activity.  Good job!");
     }
 
-    public void MindfulnessActivity()
+    public override void MindfulnessActivity()
     {
         Console.Clear();
         

@@ -20,7 +20,7 @@ public class BreathingActivity: Activity
         _breatheOutDuration = breatheOutDuration;
     }
 
-    public void MindfulnessActivity()
+    public override void MindfulnessActivity()
     {
         Console.WriteLine("");
         Console.WriteLine("");

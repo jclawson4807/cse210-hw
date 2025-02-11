@@ -25,7 +25,7 @@ public class ListingActivity: Activity
         SetAfterActivityMessage("You have completed another ", " seconds of the Listing Activity.  Good job!");
     }
 
-    public void MindfulnessActivity()
+    public override void MindfulnessActivity()
     {
         Console.Clear();
         

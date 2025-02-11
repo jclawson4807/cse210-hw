@@ -13,7 +13,7 @@ public class ClosedEyesActivity: Activity
         SetAfterActivityMessage("You have completed another ", " seconds of the Clear Your Mind Activity.  Good job!");
     }
 
-    public void MindfulnessActivity()
+    public override void MindfulnessActivity()
     {
         Console.Clear();
         _responses.Clear();
