@@ -76,7 +76,7 @@ public abstract class Goal
 
     public abstract string GetGoalDisplayString();
 
-    public void DisplayGoalMenu()
+    public int DisplayGoalMenu()
     {
         Console.Clear();
 
@@ -97,5 +97,7 @@ public abstract class Goal
         Console.WriteLine("\t5. Record Event");
         Console.WriteLine("\t6. Quit");
         
+
+
     }
 }
