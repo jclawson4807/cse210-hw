@@ -1,0 +1,210 @@
+using System;
+
+class GoalManager
+{
+    private List<Goal> _goalList = new List<Goal>();
+    private int _globalPointTotal = 0;
+
+    public int IncrementGlobalPointTotal(int incrementAmount)
+    {
+        _globalPointTotal += incrementAmount;
+        return _globalPointTotal;
+    }
+
+    public int DisplayGoalMenu()
+    {
+        // Console.Clear();
+
+        if (_globalPointTotal == 1)
+        {
+            Console.WriteLine("\nYou have 1 point.");
+        }
+        else
+        {
+            Console.WriteLine($"\nYou have {_globalPointTotal} points.");
+        }
+
+        Console.WriteLine("\n\nMenu Options:");
+        Console.WriteLine("\t1. Create New Goal");
+        Console.WriteLine("\t2. List Goals");
+        Console.WriteLine("\t3. Save Goals");
+        Console.WriteLine("\t4. Load Goals");
+        Console.WriteLine("\t5. Record Event");
+        Console.WriteLine("\t6. Quit");
+        Console.Write("Select a choice from the menu: ");
+        
+        try
+        {
+            string menuSelectionString = Console.ReadLine();
+
+            int menuSelectionInt = int.Parse(menuSelectionString);
+
+            return menuSelectionInt;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: You must enter an integer value between 1 and 6. ({e})");
+
+            Thread.Sleep(2000);
+
+            return DisplayGoalMenu();
+        }
+    }
+
+    public bool DisplayCreateGoalMenu()
+    {
+        // Console.Clear();
+
+        Console.WriteLine("\n\nThe types of Goals are:");
+        Console.WriteLine("  1. Simple Goal");
+        Console.WriteLine("  2. Eternal Goal");
+        Console.WriteLine("  3. Checklist Goal");
+        Console.Write("What type of goal would you like to create? ");
+        
+        try
+        {
+            string menuSelectionString = Console.ReadLine();
+
+            int menuSelectionInt = int.Parse(menuSelectionString);
+
+            if (menuSelectionInt == 1)
+            {
+                SimpleGoal simpleGoal = new SimpleGoal();
+                simpleGoal = simpleGoal.DisplayCreateGoalMenu();
+                _goalList.Add(simpleGoal);
+            }
+            else if (menuSelectionInt == 2)
+            {
+                EternalGoal eternalGoal = new EternalGoal();
+                eternalGoal = eternalGoal.DisplayCreateGoalMenu();
+                _goalList.Add(eternalGoal);
+            }
+            else if (menuSelectionInt == 3)
+            {
+                ChecklistGoal checklistGoal = new ChecklistGoal();
+                checklistGoal = checklistGoal.DisplayCreateGoalMenu();
+                _goalList.Add(checklistGoal);
+            }
+            else
+            {
+                Console.WriteLine("You must enter an integer value between 1 and 3.");    
+            }
+
+            Thread.Sleep(1000);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: You must enter an integer value between 1 and 3. ({e})");
+
+            Thread.Sleep(2000);
+
+            return false;
+        }
+    }
+
+    public void DisplayPrimaryMenu()
+    {
+        bool doContinue = true;
+
+        while (doContinue)
+        {
+            int actionInt = DisplayGoalMenu();
+
+            if (actionInt == 1)
+            {
+                bool goalCreated = DisplayCreateGoalMenu();
+
+                if (goalCreated)
+                {
+                    Console.WriteLine("\nGoal Created");
+                }
+                else
+                {
+                    Console.WriteLine("\nError creating goal");
+                }
+            }
+            else if (actionInt == 2)
+            {
+                // Console.Clear();
+                Console.WriteLine("\n\nThe goals are:");
+
+                foreach (Goal goal in _goalList)
+                {
+                    Console.WriteLine(goal.GetGoalDisplayString());  
+                }
+
+                Console.WriteLine("\nPress any key to continue.");
+                string userInput = Console.ReadLine();
+            }
+            else if (actionInt == 3)
+            {
+                Console.WriteLine("Save Goals");      
+            }
+            else if (actionInt == 4)
+            {
+                Console.WriteLine("Load Goals");      
+            }
+            else if (actionInt == 5)
+            {
+                // Console.Clear();
+                Console.WriteLine("\nThe goals are:");
+
+                int goalNumber = 1;
+
+                foreach (Goal goal in _goalList)
+                {
+                    Console.WriteLine($"{goalNumber}. {goal.GetGoalDisplayString()}");
+                    goalNumber++;  
+                }
+
+                int numGoals = _goalList.Count;
+
+                Console.Write("\nWhich goal did you accomplish? ");
+
+                string selectedGoalNumberString = Console.ReadLine();
+                int selectedGoalNumber = int.Parse(selectedGoalNumberString) - 1;
+
+                if (selectedGoalNumber < 0 || selectedGoalNumber > numGoals)
+                {
+                    Console.WriteLine("Please pick a valid goal number.");
+                }
+                else
+                {
+                    Goal goal = _goalList[selectedGoalNumber];
+
+                    if (goal.GetIsGoalComplete())
+                    {
+                        Console.WriteLine("The selected goal has already been completed.");
+                    }
+                    else
+                    {
+                        int pointAward = goal.RecordEvent();
+                        IncrementGlobalPointTotal(pointAward);
+
+                        Console.WriteLine($"Congratulations!  You have earned {pointAward} points!");
+                        Console.WriteLine($"You now have {_globalPointTotal} points.");
+
+                        _goalList[selectedGoalNumber] = goal;
+                    }
+                }
+
+            }
+            else if (actionInt == 6)
+            {
+                Console.WriteLine("Quitting EternalQuest Program.  Good Bye.");
+                System.Environment.Exit(1);    
+            } 
+        }
+
+        /*
+        @TODO - 
+        4) move all menu functionality from Program.cs to GoalManager class
+        5) add save and load functionality
+            this will require a version of the get goal string that returns a storable version rather than the display version
+        6) add custom functionality - add a goal type where the score increases based on how many times it is completed in a given day or how much you exceeded a base amount .... such as drinking water, walking, etc. perhaps a ranking system, something that prevents a goal from being accomplished too many times in a given day, a goal editor
+        */
+
+    }
+}
