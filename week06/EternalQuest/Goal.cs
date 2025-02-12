@@ -57,6 +57,19 @@ public abstract class Goal
         return _points;
     }
 
+    public virtual int RecordEvent()
+    {
+        if (GetIsGoalComplete() == false)
+        {
+            return GetPointTotal();
+        }
+        else
+        {
+            SetIsGoalComplete(true);
+            return IncrementPointTotal(GetPoints());  
+        }
+    }
+
     public void SetIsGoalComplete(bool isGoalComplete)
     {
         _isComplete = isGoalComplete;
@@ -65,6 +78,12 @@ public abstract class Goal
     public bool GetIsGoalComplete()
     {
         return _isComplete;
+    }
+
+    public int IncrementPointTotal(int incrementAmount)
+    {
+        _pointTotal += incrementAmount;  
+        return _pointTotal;  
     }
 
     public int GetPointTotal()
