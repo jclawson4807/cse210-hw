@@ -13,18 +13,18 @@ class Program
 
     public static int DisplayGoalMenu()
     {
-        Console.Clear();
+        // Console.Clear();
 
         if (_globalPointTotal == 1)
         {
-            Console.WriteLine("You have 1 point.");
+            Console.WriteLine("\nYou have 1 point.");
         }
         else
         {
-            Console.WriteLine($"You have {_globalPointTotal} points.");
+            Console.WriteLine($"\nYou have {_globalPointTotal} points.");
         }
 
-        Console.WriteLine("\nMenu Options:");
+        Console.WriteLine("\n\nMenu Options:");
         Console.WriteLine("\t1. Create New Goal");
         Console.WriteLine("\t2. List Goals");
         Console.WriteLine("\t3. Save Goals");
@@ -53,13 +53,13 @@ class Program
 
     public static void DisplayCreateGoalMenu()
     {
-        Console.Clear();
+        // Console.Clear();
 
-        Console.WriteLine("\nThe types of Goals are:");
-        Console.WriteLine("\t1. Simple Goal");
-        Console.WriteLine("\t2. Eternal Goal");
-        Console.WriteLine("\t3. Checklist Goal");
-        Console.Write("Wht type of goal would you like to create? ");
+        Console.WriteLine("\n\nThe types of Goals are:");
+        Console.WriteLine("  1. Simple Goal");
+        Console.WriteLine("  2. Eternal Goal");
+        Console.WriteLine("  3. Checklist Goal");
+        Console.Write("What type of goal would you like to create? ");
         
         try
         {
@@ -90,6 +90,8 @@ class Program
                 Console.WriteLine("You must enter an integer value between 1 and 3.");    
             }
 
+            Thread.Sleep(1000);
+
             DisplayGoalMenu();
         }
         catch (Exception e)
@@ -116,8 +118,8 @@ class Program
             }
             else if (actionInt == 2)
             {
-                Console.Clear();
-                Console.WriteLine("The goals are:");
+                // Console.Clear();
+                Console.WriteLine("\n\nThe goals are:");
 
                 foreach (Goal goal in _goalList)
                 {
@@ -137,28 +139,31 @@ class Program
             }
             else if (actionInt == 5)
             {
-                Console.Clear();
-                Console.WriteLine("The goals are:");
+                // Console.Clear();
+                Console.WriteLine("\nThe goals are:");
+
+                int goalNumber = 1;
 
                 foreach (Goal goal in _goalList)
                 {
-                    Console.WriteLine(goal.GetGoalDisplayString());  
+                    Console.WriteLine($"{goalNumber}. {goal.GetGoalDisplayString()}");
+                    goalNumber++;  
                 }
 
                 int numGoals = _goalList.Count;
 
-                Console.Write("\nWhich goal did you accomplish?");
+                Console.Write("\nWhich goal did you accomplish? ");
 
-                string goalNumberString = Console.ReadLine();
-                int goalNumber = int.Parse(goalNumberString);
+                string selectedGoalNumberString = Console.ReadLine();
+                int selectedGoalNumber = int.Parse(selectedGoalNumberString) - 1;
 
-                if (goalNumber < 1 || goalNumber > numGoals)
+                if (selectedGoalNumber < 0 || selectedGoalNumber > numGoals)
                 {
                     Console.WriteLine("Please pick a valid goal number.");
                 }
                 else
                 {
-                    Goal goal = _goalList[goalNumber];
+                    Goal goal = _goalList[selectedGoalNumber];
 
                     if (goal.GetIsGoalComplete())
                     {
@@ -172,7 +177,7 @@ class Program
                         Console.WriteLine($"Congratulations!  You have earned {pointAward} points!");
                         Console.WriteLine($"You now have {_globalPointTotal} points.");
 
-                        _goalList[goalNumber] = goal;
+                        _goalList[selectedGoalNumber] = goal;
                     }
                 }
 

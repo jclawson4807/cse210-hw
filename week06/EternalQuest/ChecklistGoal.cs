@@ -36,11 +36,12 @@ public class ChecklistGoal : Goal
     public int IncrementGoalCompletionTotal(int incrementAmount)
     {
         _numberOfTimesCompleted += incrementAmount;
+        IncrementPointTotal(GetPoints());
 
         if (_numberOfTimesCompleted == _numberOfCompletionsNeededForBonus)
         {
             SetIsGoalComplete(true);
-            IncrementPointTotal(GetPoints());
+            
             IncrementPointTotal(GetBonusPointsAmount());
         }
 
@@ -49,9 +50,9 @@ public class ChecklistGoal : Goal
 
     public override int RecordEvent()
     {
-        if (GetIsGoalComplete() == false)
+        if (GetIsGoalComplete() == true)
         {
-            return GetPointTotal();
+            return 0;
         }
         else
         {
