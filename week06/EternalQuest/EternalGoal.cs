@@ -12,6 +12,11 @@ public class EternalGoal : Goal
         Console.WriteLine("Created Eternal Goal");
     }
 
+    public override int RecordEvent()
+    {
+        return IncrementPointTotal(GetPoints());  
+    }
+
     public override EternalGoal DisplayCreateGoalMenu()
     {
         Console.Clear();

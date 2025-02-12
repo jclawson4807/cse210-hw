@@ -33,6 +33,32 @@ public class ChecklistGoal : Goal
         return _bonusPointsAmount;    
     }
 
+    public int IncrementGoalCompletionTotal(int incrementAmount)
+    {
+        _numberOfTimesCompleted += incrementAmount;
+
+        if (_numberOfTimesCompleted == _numberOfCompletionsNeededForBonus)
+        {
+            SetIsGoalComplete(true);
+            IncrementPointTotal(GetPoints());
+            IncrementPointTotal(GetBonusPointsAmount());
+        }
+
+        return _pointTotal;  
+    }
+
+    public override int RecordEvent()
+    {
+        if (GetIsGoalComplete() == false)
+        {
+            return GetPointTotal();
+        }
+        else
+        {
+            return IncrementGoalCompletionTotal(1); 
+        }
+    }
+
     public override ChecklistGoal DisplayCreateGoalMenu()
     {
         Console.Clear();
