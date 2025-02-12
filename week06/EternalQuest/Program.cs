@@ -116,13 +116,16 @@ class Program
             }
             else if (actionInt == 2)
             {
-                // Console.Clear();
-                Console.WriteLine("\nThe goals are:");
+                Console.Clear();
+                Console.WriteLine("The goals are:");
 
                 foreach (Goal goal in _goalList)
                 {
                     Console.WriteLine(goal.GetGoalDisplayString());  
                 }
+
+                Console.WriteLine("\nPress any key to continue.");
+                string userInput = Console.ReadLine();
             }
             else if (actionInt == 3)
             {
@@ -134,7 +137,13 @@ class Program
             }
             else if (actionInt == 5)
             {
-                ListGoals();
+                Console.Clear();
+                Console.WriteLine("The goals are:");
+
+                foreach (Goal goal in _goalList)
+                {
+                    Console.WriteLine(goal.GetGoalDisplayString());  
+                }
 
                 int numGoals = _goalList.Count;
 
@@ -183,16 +192,5 @@ class Program
         6) add custom functionality - add a goal type where the score increases based on how many times it is completed in a given day or how much you exceeded a base amount .... such as drinking water, walking, etc. perhaps a ranking system, something that prevents a goal from being accomplished too many times in a given day, a goal editor
         */
 
-    }
-
-    static void ListGoals()
-    {
-        Console.Clear();
-        Console.WriteLine("The goals are:");
-
-        foreach (Goal goal in _goalList)
-        {
-            Console.WriteLine(goal.GetGoalDisplayString());  
-        }
     }
 }
