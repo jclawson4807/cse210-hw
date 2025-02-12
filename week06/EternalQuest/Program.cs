@@ -13,7 +13,7 @@ class Program
 
     public static int DisplayGoalMenu()
     {
-        // Console.Clear();
+        Console.Clear();
 
         if (_globalPointTotal == 1)
         {
@@ -51,6 +51,57 @@ class Program
         }
     }
 
+    public static void DisplayCreateGoalMenu()
+    {
+        Console.Clear();
+
+        Console.WriteLine("\nThe types of Goals are:");
+        Console.WriteLine("\t1. Simple Goal");
+        Console.WriteLine("\t2. Eternal Goal");
+        Console.WriteLine("\t3. Checklist Goal");
+        Console.Write("Wht type of goal would you like to create? ");
+        
+        try
+        {
+            string menuSelectionString = Console.ReadLine();
+
+            int menuSelectionInt = int.Parse(menuSelectionString);
+
+            if (menuSelectionInt == 1)
+            {
+                SimpleGoal simpleGoal = new SimpleGoal();
+                simpleGoal = simpleGoal.DisplayCreateGoalMenu();
+                _goalList.Add(simpleGoal);
+            }
+            else if (menuSelectionInt == 2)
+            {
+                EternalGoal eternalGoal = new EternalGoal();
+                eternalGoal = eternalGoal.DisplayCreateGoalMenu();
+                _goalList.Add(eternalGoal);
+            }
+            else if (menuSelectionInt == 3)
+            {
+                ChecklistGoal checklistGoal = new ChecklistGoal();
+                checklistGoal = checklistGoal.DisplayCreateGoalMenu();
+                _goalList.Add(checklistGoal);
+            }
+            else
+            {
+                Console.WriteLine("You must enter an integer value between 1 and 3.");    
+            }
+
+            DisplayGoalMenu();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: You must enter an integer value between 1 and 3. ({e})");
+
+            Thread.Sleep(2000);
+
+            DisplayCreateGoalMenu();
+        }
+    }
+
     static void Main(string[] args)
     {
         bool doContinue = true;
@@ -61,7 +112,7 @@ class Program
 
             if (actionInt == 1)
             {
-                Console.WriteLine("Create New Goal");
+                DisplayCreateGoalMenu();
             }
             else if (actionInt == 2)
             {
