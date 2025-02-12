@@ -31,6 +31,18 @@ public class SimpleGoal : Goal
         return simpleGoal;
     }
 
+    public override string GetStringRepresentation()
+    {
+        string completionStateString = "false";
+
+        if (GetIsGoalComplete())
+        {
+            completionStateString = "true";    
+        }
+
+        return $"SimpleGoal:{GetTitle()}^{GetDescription()}^{GetPoints()}^{completionStateString}";
+    }
+
     public override string GetGoalDisplayString()
     {
         string goalDisplayString = "[";
