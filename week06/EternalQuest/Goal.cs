@@ -59,9 +59,9 @@ public abstract class Goal
 
     public virtual int RecordEvent()
     {
-        if (GetIsGoalComplete() == false)
+        if (GetIsGoalComplete() == true)
         {
-            return GetPointTotal();
+            return 0;
         }
         else
         {
