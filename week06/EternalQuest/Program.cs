@@ -11,15 +11,53 @@ class Program
         return _globalPointTotal;
     }
 
+    public static int DisplayGoalMenu()
+    {
+        // Console.Clear();
+
+        if (_globalPointTotal == 1)
+        {
+            Console.WriteLine("You have 1 point.");
+        }
+        else
+        {
+            Console.WriteLine($"You have {_globalPointTotal} points.");
+        }
+
+        Console.WriteLine("\nMenu Options:");
+        Console.WriteLine("\t1. Create New Goal");
+        Console.WriteLine("\t2. List Goals");
+        Console.WriteLine("\t3. Save Goals");
+        Console.WriteLine("\t4. Load Goals");
+        Console.WriteLine("\t5. Record Event");
+        Console.WriteLine("\t6. Quit");
+        Console.Write("Select a choice from the menu: ");
+        
+        try
+        {
+            string menuSelectionString = Console.ReadLine();
+
+            int menuSelectionInt = int.Parse(menuSelectionString);
+
+            return menuSelectionInt;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: You must enter an integer value between 1 and 6. ({e})");
+
+            Thread.Sleep(2000);
+
+            return DisplayGoalMenu();
+        }
+    }
+
     static void Main(string[] args)
     {
-        SimpleGoal initialGoal = new SimpleGoal();
-        
         bool doContinue = true;
 
         while (doContinue)
         {
-            int actionInt = initialGoal.DisplayGoalMenu(_globalPointTotal);
+            int actionInt = DisplayGoalMenu();
 
             if (actionInt == 1)
             {
