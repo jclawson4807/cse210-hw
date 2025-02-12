@@ -44,7 +44,7 @@ public class ChecklistGoal : Goal
             IncrementPointTotal(GetBonusPointsAmount());
         }
 
-        return _pointTotal;  
+        return GetPointTotal();  
     }
 
     public override int RecordEvent()
