@@ -89,6 +89,18 @@ public class ChecklistGoal : Goal
         return checklistGoal;
     }
 
+    public override string GetStringRepresentation()
+    {
+        string completionStateString = "false";
+
+        if (GetIsGoalComplete())
+        {
+            completionStateString = "true";    
+        }
+
+        return $"ChecklistGoal:{GetTitle()}^{GetDescription()}^{GetPoints()}^{completionStateString}^{GetNumberOfTimesCompleted()}^{GetNumberOfCompletionsNeededForBonus()}^{GetBonusPointsAmount()}";
+    }
+
     public override string GetGoalDisplayString()
     {
         string goalDisplayString = "[";
