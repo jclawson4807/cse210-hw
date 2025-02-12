@@ -14,19 +14,45 @@ class Program
     static void Main(string[] args)
     {
         SimpleGoal initialGoal = new SimpleGoal();
-
-        int actionInt = initialGoal.DisplayGoalMenu();
-
-        if (actionInt == 1)
-        {
-
-        }
-        else if (actionInt == 2)
-        {
-            ListGoals();
-        }
-
         
+        bool doContinue = true;
+
+        while (doContinue)
+        {
+            int actionInt = initialGoal.DisplayGoalMenu(_globalPointTotal);
+
+            if (actionInt == 1)
+            {
+                Console.WriteLine("Create New Goal");
+            }
+            else if (actionInt == 2)
+            {
+                // Console.Clear();
+                Console.WriteLine("\nThe goals are:");
+
+                foreach (Goal goal in _goalList)
+                {
+                    Console.WriteLine(goal.GetGoalDisplayString());  
+                }
+            }
+            else if (actionInt == 3)
+            {
+                Console.WriteLine("Save Goals");      
+            }
+            else if (actionInt == 4)
+            {
+                Console.WriteLine("Load Goals");      
+            }
+            else if (actionInt == 5)
+            {
+                Console.WriteLine("Record Event");    
+            }
+            else if (actionInt == 6)
+            {
+                Console.WriteLine("Quitting EternalQuest Program.  Good Bye.");
+                System.Environment.Exit(1);    
+            } 
+        }
 
         /*
         @TODO - 
