@@ -97,7 +97,7 @@ public abstract class Goal
         Console.WriteLine("\t5. Record Event");
         Console.WriteLine("\t6. Quit");
         
-
+        return 2;
 
     }
 }
