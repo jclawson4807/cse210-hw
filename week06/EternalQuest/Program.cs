@@ -51,7 +51,7 @@ class Program
         }
     }
 
-    public static void DisplayCreateGoalMenu()
+    public static bool DisplayCreateGoalMenu()
     {
         // Console.Clear();
 
@@ -92,7 +92,7 @@ class Program
 
             Thread.Sleep(1000);
 
-            DisplayGoalMenu();
+            return true;
         }
         catch (Exception e)
         {
@@ -100,7 +100,7 @@ class Program
 
             Thread.Sleep(2000);
 
-            DisplayCreateGoalMenu();
+            return false;
         }
     }
 
@@ -114,7 +114,16 @@ class Program
 
             if (actionInt == 1)
             {
-                DisplayCreateGoalMenu();
+                bool goalCreated = DisplayCreateGoalMenu();
+
+                if (goalCreated)
+                {
+                    Console.WriteLine("\nGoal Created");
+                }
+                else
+                {
+                    Console.WriteLine("\nError creating goal");
+                }
             }
             else if (actionInt == 2)
             {
