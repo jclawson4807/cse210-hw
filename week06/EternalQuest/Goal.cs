@@ -91,6 +91,8 @@ public abstract class Goal
         return _pointTotal;
     }
 
+    public abstract string GetStringRepresentation();
+
     public abstract Goal DisplayCreateGoalMenu();
 
     public abstract string GetGoalDisplayString();
