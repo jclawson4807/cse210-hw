@@ -36,6 +36,11 @@ public class EternalGoal : Goal
         return eternalGoal;
     }
 
+    public override string GetStringRepresentation()
+    {
+        return $"EternalGoal:{GetTitle()}^{GetDescription()}^{GetPoints()}^false";
+    }
+
     public override string GetGoalDisplayString()
     {
         string goalDisplayString = $"[ ] {GetTitle()} ({GetDescription()})"; 
