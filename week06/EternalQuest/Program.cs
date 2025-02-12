@@ -200,7 +200,6 @@ class Program
 
         /*
         @TODO - 
-        2) create the primary menu
         5) add save and load functionality
             this will require a version of the get goal string that returns a storable version rather than the display version
         6) add custom functionality - add a goal type where the score increases based on how many times it is completed in a given day or how much you exceeded a base amount .... such as drinking water, walking, etc. perhaps a ranking system, something that prevents a goal from being accomplished too many times in a given day, a goal editor
