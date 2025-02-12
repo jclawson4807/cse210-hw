@@ -134,7 +134,39 @@ class Program
             }
             else if (actionInt == 5)
             {
-                Console.WriteLine("Record Event");    
+                ListGoals();
+
+                int numGoals = _goalList.Count;
+
+                Console.Write("\nWhich goal did you accomplish?");
+
+                string goalNumberString = Console.ReadLine();
+                int goalNumber = int.Parse(goalNumberString);
+
+                if (goalNumber < 1 || goalNumber > numGoals)
+                {
+                    Console.WriteLine("Please pick a valid goal number.");
+                }
+                else
+                {
+                    Goal goal = _goalList[goalNumber];
+
+                    if (goal.GetIsGoalComplete())
+                    {
+                        Console.WriteLine("The selected goal has already been completed.");
+                    }
+                    else
+                    {
+                        int pointAward = goal.RecordEvent();
+                        IncrementGlobalPointTotal(pointAward);
+
+                        Console.WriteLine($"Congratulations!  You have earned {pointAward} points!");
+                        Console.WriteLine($"You now have {_globalPointTotal} points.");
+
+                        _goalList[goalNumber] = goal;
+                    }
+                }
+
             }
             else if (actionInt == 6)
             {
