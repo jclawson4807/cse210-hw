@@ -89,6 +89,7 @@ class GoalManager
         Console.WriteLine("  1. Simple Goal");
         Console.WriteLine("  2. Eternal Goal");
         Console.WriteLine("  3. Checklist Goal");
+        Console.WriteLine("  4. Stacked Goal");
         Console.Write("What type of goal would you like to create? ");
         
         string menuSelectionString = Console.ReadLine();
@@ -113,9 +114,15 @@ class GoalManager
             checklistGoal = checklistGoal.DisplayCreateGoalMenu();
             _goalList.Add(checklistGoal);
         }
+        else if (menuSelectionInt == 4)
+        {
+            StackedGoal stackedGoal = new StackedGoal();
+            stackedGoal = stackedGoal.DisplayCreateGoalMenu();
+            _goalList.Add(stackedGoal);
+        }
         else
         {
-            Console.WriteLine("You must enter an integer value between 1 and 3.");
+            Console.WriteLine("You must enter an integer value between 1 and 4.");
             return false;    
         }
 
@@ -237,6 +244,22 @@ class GoalManager
 
                             _goalList.Add(checklistGoal);
                         }
+                        else if (goalType.ToLower() == "stackedgoal")
+                        {
+                            int originalPoints = ExtractIntFromString(parts[4]);
+                            string lastModifiedDateString = parts[5];
+                            DateTime lastModifiedDate = DateTime.Parse(lastModifiedDateString);
+
+                            StackedGoal stackedGoal = new StackedGoal(title: title, description: description, originalPoints: originalPoints, currentPoints: points);
+                            stackedGoal.SetLastModifiedDate(lastModifiedDate);
+
+                            if (isComplete)
+                            {
+                                stackedGoal.SetIsGoalComplete(true);
+                            }
+
+                            _goalList.Add(stackedGoal);
+                        }
                     }
 
                     lineNumber++;
@@ -344,6 +367,12 @@ class GoalManager
                             checklistGoal = checklistGoal.DisplayGoalEditor();
                             _goalList[selectedGoalNumber] = checklistGoal;
                         }
+                        else if (goalType == "StackedGoal")
+                        {
+                            StackedGoal stackedGoal = (StackedGoal)goal;
+                            stackedGoal = stackedGoal.DisplayGoalEditor();
+                            _goalList[selectedGoalNumber] = stackedGoal;
+                        }
                     }
                 }
                 else
@@ -357,14 +386,5 @@ class GoalManager
                 System.Environment.Exit(1);    
             } 
         }
-
-        /*
-        @TODO - 
-        4) move all menu functionality from Program.cs to GoalManager class
-        5) add save and load functionality
-            this will require a version of the get goal string that returns a storable version rather than the display version
-        6) add custom functionality - add a goal type where the score increases based on how many times it is completed in a given day or how much you exceeded a base amount .... such as drinking water, walking, etc. perhaps a ranking system, something that prevents a goal from being accomplished too many times in a given day, a goal editor
-        */
-
     }
 }
