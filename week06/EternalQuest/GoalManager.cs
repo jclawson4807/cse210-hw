@@ -1,9 +1,38 @@
 using System;
+using System.IO;
 
 class GoalManager
 {
     private List<Goal> _goalList = new List<Goal>();
     private int _globalPointTotal = 0;
+
+    public int ExtractIntFromString(string intAsString)
+    {
+        try
+        {
+            return int.Parse(intAsString);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: Error parsing ({intAsString})");
+
+            return 0;
+        }
+    }
+
+    public bool ExtractBoolFromString(string boolAsString)
+    {
+        boolAsString = boolAsString.ToLower();
+
+        if (boolAsString == "true")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public int IncrementGlobalPointTotal(int incrementAmount)
     {
@@ -37,7 +66,7 @@ class GoalManager
         {
             string menuSelectionString = Console.ReadLine();
 
-            int menuSelectionInt = int.Parse(menuSelectionString);
+            int menuSelectionInt = ExtractIntFromString(menuSelectionString);
 
             return menuSelectionInt;
         }
@@ -61,47 +90,37 @@ class GoalManager
         Console.WriteLine("  3. Checklist Goal");
         Console.Write("What type of goal would you like to create? ");
         
-        try
+        string menuSelectionString = Console.ReadLine();
+
+        int menuSelectionInt = ExtractIntFromString(menuSelectionString);
+
+        if (menuSelectionInt == 1)
         {
-            string menuSelectionString = Console.ReadLine();
-
-            int menuSelectionInt = int.Parse(menuSelectionString);
-
-            if (menuSelectionInt == 1)
-            {
-                SimpleGoal simpleGoal = new SimpleGoal();
-                simpleGoal = simpleGoal.DisplayCreateGoalMenu();
-                _goalList.Add(simpleGoal);
-            }
-            else if (menuSelectionInt == 2)
-            {
-                EternalGoal eternalGoal = new EternalGoal();
-                eternalGoal = eternalGoal.DisplayCreateGoalMenu();
-                _goalList.Add(eternalGoal);
-            }
-            else if (menuSelectionInt == 3)
-            {
-                ChecklistGoal checklistGoal = new ChecklistGoal();
-                checklistGoal = checklistGoal.DisplayCreateGoalMenu();
-                _goalList.Add(checklistGoal);
-            }
-            else
-            {
-                Console.WriteLine("You must enter an integer value between 1 and 3.");    
-            }
-
-            Thread.Sleep(1000);
-
-            return true;
+            SimpleGoal simpleGoal = new SimpleGoal();
+            simpleGoal = simpleGoal.DisplayCreateGoalMenu();
+            _goalList.Add(simpleGoal);
         }
-        catch (Exception e)
+        else if (menuSelectionInt == 2)
         {
-            Console.WriteLine($"Exception: You must enter an integer value between 1 and 3. ({e})");
-
-            Thread.Sleep(2000);
-
-            return false;
+            EternalGoal eternalGoal = new EternalGoal();
+            eternalGoal = eternalGoal.DisplayCreateGoalMenu();
+            _goalList.Add(eternalGoal);
         }
+        else if (menuSelectionInt == 3)
+        {
+            ChecklistGoal checklistGoal = new ChecklistGoal();
+            checklistGoal = checklistGoal.DisplayCreateGoalMenu();
+            _goalList.Add(checklistGoal);
+        }
+        else
+        {
+            Console.WriteLine("You must enter an integer value between 1 and 3.");
+            return false;    
+        }
+
+        Thread.Sleep(1000);
+
+        return true;
     }
 
     public void DisplayPrimaryMenu()
@@ -132,7 +151,8 @@ class GoalManager
 
                 foreach (Goal goal in _goalList)
                 {
-                    Console.WriteLine(goal.GetGoalDisplayString());  
+                    Console.WriteLine(goal.GetGoalDisplayString()); 
+                    Console.WriteLine(goal.GetStringRepresentation());  
                 }
 
                 Console.WriteLine("\nPress any key to continue.");
@@ -140,11 +160,90 @@ class GoalManager
             }
             else if (actionInt == 3)
             {
-                Console.WriteLine("Save Goals");      
+                Console.Write("\nWhat is the filename of the goal file?");  
+                string filename = Console.ReadLine();
+
+                using (StreamWriter outputFile = new StreamWriter(filename))
+                {
+                    // write current point total
+                    outputFile.WriteLine(_globalPointTotal);
+
+                    foreach (Goal goal in _goalList)
+                    {
+                        outputFile.WriteLine(goal.GetStringRepresentation());  
+                    }
+                }
+
+                Console.Write($"\nGoals written to {filename}"); 
             }
             else if (actionInt == 4)
             {
-                Console.WriteLine("Load Goals");      
+                _goalList.Clear();
+                
+                Console.Write("\nWhat is the filename of the goal file?");  
+                string filename = Console.ReadLine();
+
+                using (StreamWriter outputFile = new StreamWriter(filename))
+                {
+                    string[] lines = System.IO.File.ReadAllLines(filename);
+
+                    int lineNumber = 0;
+
+                    foreach (string line in lines)
+                    {
+                        if (lineNumber == 0)
+                        {
+                            _globalPointTotal = ExtractIntFromString(line);
+                        }
+                        else
+                        {
+                            string[] parts = line.Split("^");
+
+                            string goalType = parts[0];
+                            string title = parts[1];
+                            string description = parts[2];
+                            int points = ExtractIntFromString(parts[3]);
+                            bool isComplete = ExtractBoolFromString(parts[4]);
+
+                            if (goalType.ToLower() == "simplegoal")
+                            {
+                                SimpleGoal simpleGoal = new SimpleGoal(title: title, description: description, points: points);
+
+                                if (isComplete)
+                                {
+                                    simpleGoal.SetIsGoalComplete(true);
+                                }
+
+                                _goalList.Add(simpleGoal);
+                            }
+                            else if (goalType.ToLower() == "eternalgoal")
+                            {
+                                EternalGoal eternalGoal = new EternalGoal(title: title, description: description, points: points);
+
+                                _goalList.Add(eternalGoal);
+                            }
+                            else if (goalType.ToLower() == "checklistgoal")
+                            {
+                                int numberOfTimesCompleted = ExtractIntFromString(parts[5]);
+                                int numberOfCompletionsNeededForBonus = ExtractIntFromString(parts[6]);
+                                int bonusPointsAmount = ExtractIntFromString(parts[7]);
+
+                                ChecklistGoal checklistGoal = new ChecklistGoal(title: title, description: description, points: points, numberOfCompletionsNeededForBonus: numberOfCompletionsNeededForBonus, numberOfTimesCompleted: numberOfTimesCompleted, bonusPointsAmount: bonusPointsAmount);
+
+                                if (isComplete)
+                                {
+                                    checklistGoal.SetIsGoalComplete(true);
+                                }
+
+                                _goalList.Add(checklistGoal);
+                            }
+                        }
+
+                        lineNumber++;
+                    }
+                }
+
+                Console.Write($"\nGoals read from {filename}");       
             }
             else if (actionInt == 5)
             {
