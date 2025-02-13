@@ -4,11 +4,12 @@ public class SimpleGoal : Goal
 {
     public SimpleGoal() : base ()
     {
-
+        SetGoalType("SimpleGoal");
     }
     
     public SimpleGoal(string title, string description, int points) : base(title: title, description: description, points: points)
     {
+        SetGoalType("SimpleGoal");
         Console.WriteLine("Created Simple Goal");
     }
 
@@ -59,5 +60,58 @@ public class SimpleGoal : Goal
         goalDisplayString = $"{goalDisplayString}] {GetTitle()} ({GetDescription()})"; 
 
         return goalDisplayString;
+    }
+
+    public override SimpleGoal DisplayGoalEditor()
+    {
+        SimpleGoal newSimpleGoal = new SimpleGoal();
+        
+        Console.Write($"\nPlease enter the new Goal name, or hit enter to use the existing value: ({GetTitle()}): ");
+
+        string title = Console.ReadLine();
+
+        if (title.Trim().Length() > 0)
+        {
+            newSimpleGoal.SetTitle(title.Trim());
+        }
+        else
+        {
+            newSimpleGoal.SetTitle(GetTitle());     
+        }
+
+        Console.Write($"\nPlease enter the new description, or hit enter to use the existing value: ({GetDescription()}): ");
+
+        string description = Console.ReadLine();
+
+        if (description.Trim().Length() > 0)
+        {
+            newSimpleGoal.SetDescription(description.Trim());
+        }
+        else
+        {
+            newSimpleGoal.SetDescription(GetDescription());
+        }
+
+        Console.Write($"\nPlease enter the new point value for this goal, or hit enter to use the existing value: ({GetPoints()}): ");
+
+        string pointsString = Console.ReadLine();
+
+        if (pointsString.Length() > 0)
+        {
+            int points = ExtractIntFromString(pointsString);
+
+            newSimpleGoal.SetPoints(points);
+        }
+        else
+        {
+            newSimpleGoal.SetPoints(GetPoints());    
+        }
+
+        if (GetIsGoalComplete())
+        {
+            newSimpleGoal.SetIsGoalComplete(true);    
+        }
+
+        return newSimpleGoal;
     }
 }
