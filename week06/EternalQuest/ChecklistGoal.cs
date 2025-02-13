@@ -8,11 +8,12 @@ public class ChecklistGoal : Goal
 
     public ChecklistGoal() : base ()
     {
-
+        SetGoalType("ChecklistGoal");
     }
     
     public ChecklistGoal(string title, string description, int points, int numberOfCompletionsNeededForBonus, int numberOfTimesCompleted, int bonusPointsAmount) : base(title: title, description: description, points: points)
     {
+        SetGoalType("ChecklistGoal");
         _numberOfCompletionsNeededForBonus = numberOfCompletionsNeededForBonus;
         _numberOfTimesCompleted = numberOfTimesCompleted;
         _bonusPointsAmount = bonusPointsAmount;
@@ -23,14 +24,29 @@ public class ChecklistGoal : Goal
         return _numberOfCompletionsNeededForBonus;    
     }
 
+    public void SetNumberOfCompletionsNeededForBonus(int numberOfCompletionsNeededForBonus)
+    {
+        _numberOfCompletionsNeededForBonus = numberOfCompletionsNeededForBonus;    
+    }
+
     public int GetNumberOfTimesCompleted()
     {
         return _numberOfTimesCompleted;    
     }
 
+    public void SetNumberOfTimesCompleted(int numberOfTimesCompleted)
+    {
+        _numberOfTimesCompleted = numberOfTimesCompleted;    
+    }
+
     public int GetBonusPointsAmount()
     {
         return _bonusPointsAmount;    
+    }
+
+    public void SetBonusPointsAmount(int bonusPointsAmount)
+    {
+        _bonusPointsAmount = bonusPointsAmount;    
     }
 
     public int IncrementGoalCompletionTotal(int incrementAmount)
@@ -117,5 +133,88 @@ public class ChecklistGoal : Goal
         goalDisplayString = $"{goalDisplayString}] {GetTitle()} ({GetDescription()}) -- Currently completed: {GetNumberOfTimesCompleted()}/{GetNumberOfCompletionsNeededForBonus()}"; 
 
         return goalDisplayString;
+    }
+
+    public override ChecklistGoal DisplayGoalEditor()
+    {
+        ChecklistGoal newChecklistGoal = new ChecklistGoal();
+        
+        Console.Write($"\nPlease enter the new Goal name, or hit enter to use the existing value: ({GetTitle()}): ");
+
+        string title = Console.ReadLine();
+
+        if (title.Trim().Length() > 0)
+        {
+            newChecklistGoal.SetTitle(title.Trim());
+        }
+        else
+        {
+            newChecklistGoal.SetTitle(GetTitle());     
+        }
+
+        Console.Write($"\nPlease enter the new description, or hit enter to use the existing value: ({GetDescription()}): ");
+
+        string description = Console.ReadLine();
+
+        if (description.Trim().Length() > 0)
+        {
+            newChecklistGoal.SetDescription(description.Trim());
+        }
+        else
+        {
+            newChecklistGoal.SetDescription(GetDescription());
+        }
+
+        Console.Write($"\nPlease enter the new point value for this goal, or hit enter to use the existing value: ({GetPoints()}): ");
+
+        string pointsString = Console.ReadLine();
+
+        if (pointsString.Length() > 0)
+        {
+            int points = ExtractIntFromString(pointsString);
+
+            newChecklistGoal.SetPoints(points);
+        }
+        else
+        {
+            newChecklistGoal.SetPoints(GetPoints());    
+        }
+
+        Console.Write($"\nPlease enter the new number of times does this goal need to be accomplished for a bonus, or hit enter to use the existing value: ({GetNumberOfCompletionsNeededForBonus()}): ");
+        string numberOfCompletionsNeededForBonusString = Console.ReadLine();
+
+        if (numberOfCompletionsNeededForBonusString.Length() > 0)
+        {
+            int numberOfCompletionsNeededForBonus = ExtractIntFromString(numberOfCompletionsNeededForBonusString);
+
+            newChecklistGoal.SetNumberOfCompletionsNeededForBonus(numberOfCompletionsNeededForBonus);
+        }
+        else
+        {
+            newChecklistGoal.SetNumberOfCompletionsNeededForBonus(GetNumberOfCompletionsNeededForBonus());    
+        }
+
+        Console.Write($"\nPlease enter the new bonus for accomplishing this goal that many times, or hit enter to use the existing value: ({GetBonusPointsAmount()}): ");
+        string bonusPointsAmountString = Console.ReadLine();
+
+        if (bonusPointsAmountString.Length() > 0)
+        {
+            int bonusPointsAmount = ExtractIntFromString(bonusPointsAmountString);
+
+            newChecklistGoal.SetBonusPointsAmount(bonusPointsAmount);
+        }
+        else
+        {
+            newChecklistGoal.SetBonusPointsAmount(GetBonusPointsAmount());    
+        }
+
+        newChecklistGoal.SetNumberOfTimesCompleted(GetNumberOfTimesCompleted());
+
+        if (GetIsGoalComplete())
+        {
+            newChecklistGoal.SetIsGoalComplete(true);    
+        }
+
+        return newChecklistGoal;
     }
 }
