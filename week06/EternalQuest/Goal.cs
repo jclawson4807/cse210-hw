@@ -22,6 +22,11 @@ public abstract class Goal
         _points = points;
     }
 
+    public void SetGoalType(string goalType)
+    {
+        _goalType = goalType;
+    }
+
     public string GetGoalType()
     {
         return _goalType;
@@ -96,4 +101,20 @@ public abstract class Goal
     public abstract Goal DisplayCreateGoalMenu();
 
     public abstract string GetGoalDisplayString();
+
+    public virtual Goal DisplayGoalEditor();
+
+    public int ExtractIntFromString(string intAsString)
+    {
+        try
+        {
+            return int.Parse(intAsString);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: Error parsing ({intAsString})");
+
+            return 0;
+        }
+    }
 }
