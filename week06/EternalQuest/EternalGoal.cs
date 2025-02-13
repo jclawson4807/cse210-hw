@@ -57,7 +57,7 @@ public class EternalGoal : Goal
 
         string title = Console.ReadLine();
 
-        if (title.Trim().Length() > 0)
+        if (title.Trim().Length > 0)
         {
             newEternalGoal.SetTitle(title.Trim());
         }
@@ -70,7 +70,7 @@ public class EternalGoal : Goal
 
         string description = Console.ReadLine();
 
-        if (description.Trim().Length() > 0)
+        if (description.Trim().Length > 0)
         {
             newEternalGoal.SetDescription(description.Trim());
         }
@@ -83,7 +83,7 @@ public class EternalGoal : Goal
 
         string pointsString = Console.ReadLine();
 
-        if (pointsString.Length() > 0)
+        if (pointsString.Length > 0)
         {
             int points = ExtractIntFromString(pointsString);
 
