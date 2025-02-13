@@ -59,7 +59,8 @@ class GoalManager
         Console.WriteLine("\t3. Save Goals");
         Console.WriteLine("\t4. Load Goals");
         Console.WriteLine("\t5. Record Event");
-        Console.WriteLine("\t6. Quit");
+        Console.WriteLine("\t6. Edit Goal");
+        Console.WriteLine("\t7. Quit");
         Console.Write("Select a choice from the menu: ");
         
         try
@@ -196,11 +197,6 @@ class GoalManager
                     else
                     {
                         string[] parts = line.Split("^");
-
-                        // foreach (string p in parts)
-                        // {
-                        //     Console.WriteLine(p);
-                        // }
   
                         string[] goalTypeAndTitleArray = parts[0].Split(":");
                         string goalType = goalTypeAndTitleArray[0];
@@ -294,6 +290,54 @@ class GoalManager
 
             }
             else if (actionInt == 6)
+            {
+                Console.WriteLine("\nGOAL EDITOR\n");
+                Console.WriteLine("\nThe goals are:");
+
+                int goalNumber = 1;
+
+                foreach (Goal goal in _goalList)
+                {
+                    Console.WriteLine($"{goalNumber}. {goal.GetGoalDisplayString()}");
+                    goalNumber++;  
+                }
+
+                int numGoals = _goalList.Count;
+
+                Console.Write("\nWhich goal do you want to edit? ");
+
+                string selectedGoalNumberString = Console.ReadLine();
+                int selectedGoalNumber = int.Parse(selectedGoalNumberString) - 1;
+
+                if (selectedGoalNumber < 0 || selectedGoalNumber > numGoals)
+                {
+                    Console.WriteLine("Please pick a valid goal number.");
+                }
+                else
+                {
+                    Goal goal = _goalList[selectedGoalNumber];
+
+                    string goalType = goal.GetGoalType();
+
+                    if (goalType == "SimpleGoal")
+                    {
+                        SimpleGoal simpleGoal = goalType.DisplayGoalEditor();
+                        _goalList[selectedGoalNumber] = simpleGoal;
+                    }
+                    else if (goalType == "EternalGoal")
+                    {
+                        EternalGoal eternalGoal = goalType.DisplayGoalEditor();
+                        _goalList[selectedGoalNumber] = eternalGoal;
+                    }
+                    else if (goalType == "ChecklistGoal")
+                    {
+                        ChecklistGoal checklistGoal = goalType.DisplayGoalEditor();
+                        _goalList[selectedGoalNumber] = checklistGoal;
+                    }
+                }
+
+            }
+            else if (actionInt == 7)
             {
                 Console.WriteLine("Quitting EternalQuest Program.  Good Bye.");
                 System.Environment.Exit(1);    
