@@ -92,26 +92,29 @@ public class SimpleGoal : Goal
             newSimpleGoal.SetDescription(GetDescription());
         }
 
-        Console.Write($"\nPlease enter the new point value for this goal, or hit enter to use the existing value: ({GetPoints()}): ");
-
-        string pointsString = Console.ReadLine();
-
-        if (pointsString.Length > 0)
+        if (GetIsGoalComplete())
         {
-            int points = ExtractIntFromString(pointsString);
-
-            newSimpleGoal.SetPoints(points);
+            newSimpleGoal.SetIsGoalComplete(true); 
+            newSimpleGoal.SetPoints(GetPoints());     
         }
         else
         {
-            newSimpleGoal.SetPoints(GetPoints());    
-        }
+            Console.Write($"\nPlease enter the new point value for this goal, or hit enter to use the existing value: ({GetPoints()}): ");
 
-        if (GetIsGoalComplete())
-        {
-            newSimpleGoal.SetIsGoalComplete(true);    
-        }
+            string pointsString = Console.ReadLine();
 
+            if (pointsString.Length > 0)
+            {
+                int points = ExtractIntFromString(pointsString);
+
+                newSimpleGoal.SetPoints(points);
+            }
+            else
+            {
+                newSimpleGoal.SetPoints(GetPoints());    
+            }
+        }
+        
         return newSimpleGoal;
     }
 }
