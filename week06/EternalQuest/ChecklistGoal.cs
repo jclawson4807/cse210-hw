@@ -88,17 +88,17 @@ public class ChecklistGoal : Goal
         Console.Write("\nWhat is the amount of points associated with this goal? ");
         string numberOfPointsString = Console.ReadLine();
 
-        int points = int.Parse(numberOfPointsString);
+        int points = ExtractIntFromString(numberOfPointsString);
 
         Console.Write("\nHow many times does this goal need to be accomplished for a bonus? ");
         string numberOfCompletionsNeededForBonusString = Console.ReadLine();
 
-        int numberOfCompletionsNeededForBonus = int.Parse(numberOfCompletionsNeededForBonusString);
+        int numberOfCompletionsNeededForBonus = ExtractIntFromString(numberOfCompletionsNeededForBonusString);
 
         Console.Write("\nWhat is the bonus for accomplishing this goal that many times? ");
         string bonusPointsAmountString = Console.ReadLine();
 
-        int bonusPointsAmount = int.Parse(bonusPointsAmountString);
+        int bonusPointsAmount = ExtractIntFromString(bonusPointsAmountString);
 
         ChecklistGoal checklistGoal = new ChecklistGoal(title: title, description: description, points: points, numberOfCompletionsNeededForBonus: numberOfCompletionsNeededForBonus, numberOfTimesCompleted: 0, bonusPointsAmount: bonusPointsAmount);
 

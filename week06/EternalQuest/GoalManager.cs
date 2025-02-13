@@ -170,19 +170,26 @@ class GoalManager
                 Console.Write("\nWhat is the filename of the goal file? ");  
                 string filename = Console.ReadLine();
 
-                using (StreamWriter outputFile = new StreamWriter(filename))
+                if (File.Exists(filename))
                 {
-                    Console.WriteLine("write current point total");
-                    outputFile.WriteLine(_globalPointTotal);
-
-                    foreach (Goal goal in _goalList)
+                    using (StreamWriter outputFile = new StreamWriter(filename))
                     {
-                        Console.WriteLine(goal.GetStringRepresentation());
-                        outputFile.WriteLine(goal.GetStringRepresentation());  
-                    }
-                }
+                        Console.WriteLine("write current point total");
+                        outputFile.WriteLine(_globalPointTotal);
 
-                Console.Write($"\nGoals written to {filename}"); 
+                        foreach (Goal goal in _goalList)
+                        {
+                            Console.WriteLine(goal.GetStringRepresentation());
+                            outputFile.WriteLine(goal.GetStringRepresentation());  
+                        }
+                    }
+
+                    Console.WriteLine($"\nGoals written to {filename}"); 
+                }
+                else
+                {
+                    Console.WriteLine($"\nFile {filename} not found.");
+                }
             }
             else if (actionInt == 4)
             {
@@ -191,81 +198,88 @@ class GoalManager
                 Console.Write("\nWhat is the filename of the goal file? ");  
                 string filename = Console.ReadLine();
 
-                string[] lines = System.IO.File.ReadAllLines(filename);
-
-                int lineNumber = 0;
-
-                foreach (string line in lines)
+                if (File.Exists(filename))
                 {
-                    if (lineNumber == 0)
+                    string[] lines = System.IO.File.ReadAllLines(filename);
+
+                    int lineNumber = 0;
+
+                    foreach (string line in lines)
                     {
-                        _globalPointTotal = ExtractIntFromString(line);
+                        if (lineNumber == 0)
+                        {
+                            _globalPointTotal = ExtractIntFromString(line);
+                        }
+                        else
+                        {
+                            string[] parts = line.Split("^");
+    
+                            string[] goalTypeAndTitleArray = parts[0].Split(":");
+                            string goalType = goalTypeAndTitleArray[0];
+                            string title = goalTypeAndTitleArray[1];
+                            string description = parts[1];
+                            int points = ExtractIntFromString(parts[2]);
+                            bool isComplete = ExtractBoolFromString(parts[3]);
+
+                            if (goalType.ToLower() == "simplegoal")
+                            {
+                                SimpleGoal simpleGoal = new SimpleGoal(title: title, description: description, points: points);
+
+                                if (isComplete)
+                                {
+                                    simpleGoal.SetIsGoalComplete(true);
+                                }
+
+                                _goalList.Add(simpleGoal);
+                            }
+                            else if (goalType.ToLower() == "eternalgoal")
+                            {
+                                EternalGoal eternalGoal = new EternalGoal(title: title, description: description, points: points);
+
+                                _goalList.Add(eternalGoal);
+                            }
+                            else if (goalType.ToLower() == "checklistgoal")
+                            {
+                                int numberOfTimesCompleted = ExtractIntFromString(parts[4]);
+                                int numberOfCompletionsNeededForBonus = ExtractIntFromString(parts[5]);
+                                int bonusPointsAmount = ExtractIntFromString(parts[6]);
+
+                                ChecklistGoal checklistGoal = new ChecklistGoal(title: title, description: description, points: points, numberOfCompletionsNeededForBonus: numberOfCompletionsNeededForBonus, numberOfTimesCompleted: numberOfTimesCompleted, bonusPointsAmount: bonusPointsAmount);
+
+                                if (isComplete)
+                                {
+                                    checklistGoal.SetIsGoalComplete(true);
+                                }
+
+                                _goalList.Add(checklistGoal);
+                            }
+                            else if (goalType.ToLower() == "stackedgoal")
+                            {
+                                int originalPoints = ExtractIntFromString(parts[4]);
+                                string lastModifiedDateString = parts[5];
+                                DateTime lastModifiedDate = DateTime.Parse(lastModifiedDateString);
+
+                                StackedGoal stackedGoal = new StackedGoal(title: title, description: description, originalPoints: originalPoints, currentPoints: points);
+                                stackedGoal.SetLastModifiedDate(lastModifiedDate);
+
+                                if (isComplete)
+                                {
+                                    stackedGoal.SetIsGoalComplete(true);
+                                }
+
+                                _goalList.Add(stackedGoal);
+                            }
+                        }
+
+                        lineNumber++;
                     }
-                    else
-                    {
-                        string[] parts = line.Split("^");
-  
-                        string[] goalTypeAndTitleArray = parts[0].Split(":");
-                        string goalType = goalTypeAndTitleArray[0];
-                        string title = goalTypeAndTitleArray[1];
-                        string description = parts[1];
-                        int points = ExtractIntFromString(parts[2]);
-                        bool isComplete = ExtractBoolFromString(parts[3]);
 
-                        if (goalType.ToLower() == "simplegoal")
-                        {
-                            SimpleGoal simpleGoal = new SimpleGoal(title: title, description: description, points: points);
-
-                            if (isComplete)
-                            {
-                                simpleGoal.SetIsGoalComplete(true);
-                            }
-
-                            _goalList.Add(simpleGoal);
-                        }
-                        else if (goalType.ToLower() == "eternalgoal")
-                        {
-                            EternalGoal eternalGoal = new EternalGoal(title: title, description: description, points: points);
-
-                            _goalList.Add(eternalGoal);
-                        }
-                        else if (goalType.ToLower() == "checklistgoal")
-                        {
-                            int numberOfTimesCompleted = ExtractIntFromString(parts[4]);
-                            int numberOfCompletionsNeededForBonus = ExtractIntFromString(parts[5]);
-                            int bonusPointsAmount = ExtractIntFromString(parts[6]);
-
-                            ChecklistGoal checklistGoal = new ChecklistGoal(title: title, description: description, points: points, numberOfCompletionsNeededForBonus: numberOfCompletionsNeededForBonus, numberOfTimesCompleted: numberOfTimesCompleted, bonusPointsAmount: bonusPointsAmount);
-
-                            if (isComplete)
-                            {
-                                checklistGoal.SetIsGoalComplete(true);
-                            }
-
-                            _goalList.Add(checklistGoal);
-                        }
-                        else if (goalType.ToLower() == "stackedgoal")
-                        {
-                            int originalPoints = ExtractIntFromString(parts[4]);
-                            string lastModifiedDateString = parts[5];
-                            DateTime lastModifiedDate = DateTime.Parse(lastModifiedDateString);
-
-                            StackedGoal stackedGoal = new StackedGoal(title: title, description: description, originalPoints: originalPoints, currentPoints: points);
-                            stackedGoal.SetLastModifiedDate(lastModifiedDate);
-
-                            if (isComplete)
-                            {
-                                stackedGoal.SetIsGoalComplete(true);
-                            }
-
-                            _goalList.Add(stackedGoal);
-                        }
-                    }
-
-                    lineNumber++;
-                }
-
-                Console.Write($"\nGoals read from {filename}");       
+                    Console.WriteLine($"\nGoals read from {filename}");  
+                } 
+                else
+                {
+                    Console.WriteLine($"\nFile {filename} not found.");
+                }    
             }
             else if (actionInt == 5)
             {
@@ -285,7 +299,7 @@ class GoalManager
                 Console.Write("\nWhich goal did you accomplish? ");
 
                 string selectedGoalNumberString = Console.ReadLine();
-                int selectedGoalNumber = int.Parse(selectedGoalNumberString) - 1;
+                int selectedGoalNumber = ExtractIntFromString(selectedGoalNumberString) - 1;
 
                 if (selectedGoalNumber < 0 || selectedGoalNumber > numGoals)
                 {
@@ -337,7 +351,7 @@ class GoalManager
                     Console.Write("\nWhich goal do you want to edit? ");
 
                     string selectedGoalNumberString = Console.ReadLine();
-                    int selectedGoalNumber = int.Parse(selectedGoalNumberString) - 1;
+                    int selectedGoalNumber = ExtractIntFromString(selectedGoalNumberString) - 1;
 
                     if (selectedGoalNumber < 0 || selectedGoalNumber > numGoals)
                     {

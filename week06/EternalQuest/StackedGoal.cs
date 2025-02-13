@@ -72,7 +72,7 @@ public class StackedGoal : Goal
         Console.Write("\nWhat is the amount of points associated with this goal? ");
         string numberOfPoints = Console.ReadLine();
 
-        int points = int.Parse(numberOfPoints);
+        int points = ExtractIntFromString(numberOfPoints);
 
         StackedGoal StackedGoal = new StackedGoal(title: title, description: description, originalPoints: points, currentPoints: points);
 

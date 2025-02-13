@@ -25,7 +25,7 @@ public class SimpleGoal : Goal
         Console.Write("\nWhat is the amount of points associated with this goal? ");
         string numberOfPoints = Console.ReadLine();
 
-        int points = int.Parse(numberOfPoints);
+        int points = ExtractIntFromString(numberOfPoints);
 
         SimpleGoal simpleGoal = new SimpleGoal(title: title, description: description, points: points);
 
@@ -114,7 +114,7 @@ public class SimpleGoal : Goal
                 newSimpleGoal.SetPoints(GetPoints());    
             }
         }
-        
+
         return newSimpleGoal;
     }
 }

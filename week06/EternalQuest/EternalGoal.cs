@@ -30,7 +30,7 @@ public class EternalGoal : Goal
         Console.Write("\nWhat is the amount of points associated with this goal? ");
         string numberOfPoints = Console.ReadLine();
 
-        int points = int.Parse(numberOfPoints);
+        int points = ExtractIntFromString(numberOfPoints);
 
         EternalGoal eternalGoal = new EternalGoal(title: title, description: description, points: points);
 
