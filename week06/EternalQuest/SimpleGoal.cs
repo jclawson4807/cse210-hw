@@ -70,7 +70,7 @@ public class SimpleGoal : Goal
 
         string title = Console.ReadLine();
 
-        if (title.Trim().Length() > 0)
+        if (title.Trim().Length > 0)
         {
             newSimpleGoal.SetTitle(title.Trim());
         }
@@ -83,7 +83,7 @@ public class SimpleGoal : Goal
 
         string description = Console.ReadLine();
 
-        if (description.Trim().Length() > 0)
+        if (description.Trim().Length > 0)
         {
             newSimpleGoal.SetDescription(description.Trim());
         }
@@ -96,7 +96,7 @@ public class SimpleGoal : Goal
 
         string pointsString = Console.ReadLine();
 
-        if (pointsString.Length() > 0)
+        if (pointsString.Length > 0)
         {
             int points = ExtractIntFromString(pointsString);
 

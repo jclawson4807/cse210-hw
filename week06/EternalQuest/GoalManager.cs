@@ -321,17 +321,20 @@ class GoalManager
 
                     if (goalType == "SimpleGoal")
                     {
-                        SimpleGoal simpleGoal = goalType.DisplayGoalEditor();
+                        SimpleGoal simpleGoal = (SimpleGoal)goal;
+                        simpleGoal = simpleGoal.DisplayGoalEditor();
                         _goalList[selectedGoalNumber] = simpleGoal;
                     }
                     else if (goalType == "EternalGoal")
                     {
-                        EternalGoal eternalGoal = goalType.DisplayGoalEditor();
+                        EternalGoal eternalGoal = (EternalGoal)goal;
+                        eternalGoal = eternalGoal.DisplayGoalEditor();
                         _goalList[selectedGoalNumber] = eternalGoal;
                     }
                     else if (goalType == "ChecklistGoal")
                     {
-                        ChecklistGoal checklistGoal = goalType.DisplayGoalEditor();
+                        ChecklistGoal checklistGoal = (ChecklistGoal)goal;
+                        checklistGoal = checklistGoal.DisplayGoalEditor();
                         _goalList[selectedGoalNumber] = checklistGoal;
                     }
                 }

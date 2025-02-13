@@ -102,7 +102,7 @@ public abstract class Goal
 
     public abstract string GetGoalDisplayString();
 
-    public virtual Goal DisplayGoalEditor();
+    public abstract Goal DisplayGoalEditor();
 
     public int ExtractIntFromString(string intAsString)
     {
