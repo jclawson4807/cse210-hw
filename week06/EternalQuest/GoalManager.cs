@@ -292,53 +292,64 @@ class GoalManager
             else if (actionInt == 6)
             {
                 Console.WriteLine("\nGOAL EDITOR\n");
-                Console.WriteLine("\nThe goals are:");
+                Console.WriteLine("\nThe unfinished goals are:");
 
                 int goalNumber = 1;
+                bool hasIncompleteGoals = false;
 
                 foreach (Goal goal in _goalList)
                 {
-                    Console.WriteLine($"{goalNumber}. {goal.GetGoalDisplayString()}");
-                    goalNumber++;  
+                    if (goal.GetIsGoalComplete() == false)
+                    {
+                        hasIncompleteGoals = true;
+                        Console.WriteLine($"{goalNumber}. {goal.GetGoalDisplayString()}");  
+                    }
+                    goalNumber++;
                 }
 
                 int numGoals = _goalList.Count;
 
-                Console.Write("\nWhich goal do you want to edit? ");
-
-                string selectedGoalNumberString = Console.ReadLine();
-                int selectedGoalNumber = int.Parse(selectedGoalNumberString) - 1;
-
-                if (selectedGoalNumber < 0 || selectedGoalNumber > numGoals)
+                if (hasIncompleteGoals)
                 {
-                    Console.WriteLine("Please pick a valid goal number.");
+                    Console.Write("\nWhich goal do you want to edit? ");
+
+                    string selectedGoalNumberString = Console.ReadLine();
+                    int selectedGoalNumber = int.Parse(selectedGoalNumberString) - 1;
+
+                    if (selectedGoalNumber < 0 || selectedGoalNumber > numGoals)
+                    {
+                        Console.WriteLine("Please pick a valid goal number.");
+                    }
+                    else
+                    {
+                        Goal goal = _goalList[selectedGoalNumber];
+
+                        string goalType = goal.GetGoalType();
+
+                        if (goalType == "SimpleGoal")
+                        {
+                            SimpleGoal simpleGoal = (SimpleGoal)goal;
+                            simpleGoal = simpleGoal.DisplayGoalEditor();
+                            _goalList[selectedGoalNumber] = simpleGoal;
+                        }
+                        else if (goalType == "EternalGoal")
+                        {
+                            EternalGoal eternalGoal = (EternalGoal)goal;
+                            eternalGoal = eternalGoal.DisplayGoalEditor();
+                            _goalList[selectedGoalNumber] = eternalGoal;
+                        }
+                        else if (goalType == "ChecklistGoal")
+                        {
+                            ChecklistGoal checklistGoal = (ChecklistGoal)goal;
+                            checklistGoal = checklistGoal.DisplayGoalEditor();
+                            _goalList[selectedGoalNumber] = checklistGoal;
+                        }
+                    }
                 }
                 else
                 {
-                    Goal goal = _goalList[selectedGoalNumber];
-
-                    string goalType = goal.GetGoalType();
-
-                    if (goalType == "SimpleGoal")
-                    {
-                        SimpleGoal simpleGoal = (SimpleGoal)goal;
-                        simpleGoal = simpleGoal.DisplayGoalEditor();
-                        _goalList[selectedGoalNumber] = simpleGoal;
-                    }
-                    else if (goalType == "EternalGoal")
-                    {
-                        EternalGoal eternalGoal = (EternalGoal)goal;
-                        eternalGoal = eternalGoal.DisplayGoalEditor();
-                        _goalList[selectedGoalNumber] = eternalGoal;
-                    }
-                    else if (goalType == "ChecklistGoal")
-                    {
-                        ChecklistGoal checklistGoal = (ChecklistGoal)goal;
-                        checklistGoal = checklistGoal.DisplayGoalEditor();
-                        _goalList[selectedGoalNumber] = checklistGoal;
-                    }
+                    Console.WriteLine("You have no incomplete goals.  You can not edit a completed goal.");
                 }
-
             }
             else if (actionInt == 7)
             {
