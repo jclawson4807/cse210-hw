@@ -5,6 +5,13 @@ public class Cycling : Activity
     private double _speedInMph;
     private double _distanceInMiles;
 
+    public Cycling(DateTime activityDate, int activityDurationInMinutes, double distanceInMiles, double speedInMph) : base(activityDate: activityDate, activityDurationInMinutes: activityDurationInMinutes)
+    {
+        _distanceInMiles = distanceInMiles;
+        _speedInMph = speedInMph;
+        SetActivityName("Cycling");
+    }
+
     public override double GetDistance()
     {
         return _distanceInMiles;   
