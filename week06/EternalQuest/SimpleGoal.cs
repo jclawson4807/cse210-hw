@@ -16,7 +16,9 @@ public class SimpleGoal : Goal
     public override SimpleGoal DisplayCreateGoalMenu()
     {
         Console.Clear();
-        Console.Write("What is the name of your goal? ");
+        Console.WriteLine("CREATE SIMPLE GOAL");
+
+        Console.Write("\nWhat is the name of your goal? ");
         string title = Console.ReadLine();
 
         Console.Write("\nWhat is a short description of your goal? ");
@@ -64,6 +66,9 @@ public class SimpleGoal : Goal
 
     public override SimpleGoal DisplayGoalEditor()
     {
+        Console.Clear();
+        Console.WriteLine("EDIT SIMPLE GOAL");
+        
         SimpleGoal newSimpleGoal = new SimpleGoal();
         
         Console.Write($"\nPlease enter the new Goal name, or hit enter to use the existing value: ({GetTitle()}): ");

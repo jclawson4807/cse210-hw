@@ -42,8 +42,8 @@ class GoalManager
 
     public int DisplayGoalMenu()
     {
-        // Console.Clear();
-
+        Console.WriteLine("\n\nGOAL MENU");
+        
         if (_globalPointTotal == 1)
         {
             Console.WriteLine("\nYou have 1 point.");
@@ -53,39 +53,34 @@ class GoalManager
             Console.WriteLine($"\nYou have {_globalPointTotal} points.");
         }
 
-        Console.WriteLine("\n\nMenu Options:");
-        Console.WriteLine("\t1. Create New Goal");
-        Console.WriteLine("\t2. List Goals");
-        Console.WriteLine("\t3. Save Goals");
-        Console.WriteLine("\t4. Load Goals");
-        Console.WriteLine("\t5. Record Event");
-        Console.WriteLine("\t6. Edit Goal");
-        Console.WriteLine("\t7. Quit");
+        Console.WriteLine("\nMenu Options:");
+        Console.WriteLine("  1. Create New Goal");
+        Console.WriteLine("  2. List Goals");
+        Console.WriteLine("  3. Save Goals");
+        Console.WriteLine("  4. Load Goals");
+        Console.WriteLine("  5. Record Event");
+        Console.WriteLine("  6. Edit Goal");
+        Console.WriteLine("  7. Quit");
         Console.Write("Select a choice from the menu: ");
         
-        try
+        string menuSelectionString = Console.ReadLine();
+
+        int menuSelectionInt = ExtractIntFromString(menuSelectionString);
+
+        if (menuSelectionInt < 1 || menuSelectionInt > 7)
         {
-            string menuSelectionString = Console.ReadLine();
-
-            int menuSelectionInt = ExtractIntFromString(menuSelectionString);
-
-            return menuSelectionInt;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Exception: You must enter an integer value between 1 and 6. ({e})");
-
-            Thread.Sleep(2000);
-
+            Console.WriteLine("You must enter an integer between 1 and 7 inclusive.");
             return DisplayGoalMenu();
         }
+
+        return menuSelectionInt;
     }
 
     public bool DisplayCreateGoalMenu()
     {
-        // Console.Clear();
+        Console.WriteLine("\n\nCREATE GOAL MENU");
 
-        Console.WriteLine("\n\nThe types of Goals are:");
+        Console.WriteLine("\nThe types of Goals are:");
         Console.WriteLine("  1. Simple Goal");
         Console.WriteLine("  2. Eternal Goal");
         Console.WriteLine("  3. Checklist Goal");
@@ -122,11 +117,9 @@ class GoalManager
         }
         else
         {
-            Console.WriteLine("You must enter an integer value between 1 and 4.");
+            Console.WriteLine("You must enter an integer value between 1 and 4 inclusive.");
             return false;    
         }
-
-        Thread.Sleep(1000);
 
         return true;
     }
@@ -154,8 +147,10 @@ class GoalManager
             }
             else if (actionInt == 2)
             {
-                // Console.Clear();
-                Console.WriteLine("\n\nThe goals are:");
+                
+                Console.WriteLine("\n\nGOAL LIST");
+
+                Console.WriteLine("\nThe goals are:");
 
                 foreach (Goal goal in _goalList)
                 {
@@ -167,33 +162,30 @@ class GoalManager
             }
             else if (actionInt == 3)
             {
+                Console.WriteLine("\n\nWRITE GOALS TO FILE");
+                
                 Console.Write("\nWhat is the filename of the goal file? ");  
                 string filename = Console.ReadLine();
 
-                if (File.Exists(filename))
+                using (StreamWriter outputFile = new StreamWriter(filename))
                 {
-                    using (StreamWriter outputFile = new StreamWriter(filename))
+                    Console.WriteLine("write current point total");
+                    outputFile.WriteLine(_globalPointTotal);
+
+                    foreach (Goal goal in _goalList)
                     {
-                        Console.WriteLine("write current point total");
-                        outputFile.WriteLine(_globalPointTotal);
-
-                        foreach (Goal goal in _goalList)
-                        {
-                            Console.WriteLine(goal.GetStringRepresentation());
-                            outputFile.WriteLine(goal.GetStringRepresentation());  
-                        }
+                        Console.WriteLine(goal.GetStringRepresentation());
+                        outputFile.WriteLine(goal.GetStringRepresentation());  
                     }
+                }
 
-                    Console.WriteLine($"\nGoals written to {filename}"); 
-                }
-                else
-                {
-                    Console.WriteLine($"\nFile {filename} not found.");
-                }
+                Console.WriteLine($"\nGoals written to {filename}"); 
             }
             else if (actionInt == 4)
             {
                 _goalList.Clear();
+
+                Console.WriteLine("\n\nREAD GOALS FROM FILE");
                 
                 Console.Write("\nWhat is the filename of the goal file? ");  
                 string filename = Console.ReadLine();
@@ -283,7 +275,8 @@ class GoalManager
             }
             else if (actionInt == 5)
             {
-                // Console.Clear();
+                Console.WriteLine("\n\nRECORD GOAL EVENT");
+
                 Console.WriteLine("\nThe goals are:");
 
                 int goalNumber = 1;
@@ -328,7 +321,7 @@ class GoalManager
             }
             else if (actionInt == 6)
             {
-                Console.WriteLine("\nGOAL EDITOR\n");
+                Console.WriteLine("\n\nGOAL EDITOR");
                 Console.WriteLine("\nThe unfinished goals are:");
 
                 int goalNumber = 1;

@@ -79,7 +79,9 @@ public class ChecklistGoal : Goal
     public override ChecklistGoal DisplayCreateGoalMenu()
     {
         Console.Clear();
-        Console.Write("What is the name of your goal? ");
+        Console.WriteLine("CREATE CHECKLIST GOAL");
+
+        Console.Write("\nWhat is the name of your goal? ");
         string title = Console.ReadLine();
 
         Console.Write("\nWhat is a short description of your goal? ");
@@ -137,6 +139,9 @@ public class ChecklistGoal : Goal
 
     public override ChecklistGoal DisplayGoalEditor()
     {
+        Console.Clear();
+        Console.WriteLine("EDIT CHECKLIST GOAL");
+        
         ChecklistGoal newChecklistGoal = new ChecklistGoal();
         
         Console.Write($"\nPlease enter the new Goal name, or hit enter to use the existing value: ({GetTitle()}): ");

@@ -21,7 +21,9 @@ public class EternalGoal : Goal
     public override EternalGoal DisplayCreateGoalMenu()
     {
         Console.Clear();
-        Console.Write("What is the name of your goal? ");
+        Console.WriteLine("CREATE ETERNAL GOAL");
+
+        Console.Write("\nWhat is the name of your goal? ");
         string title = Console.ReadLine();
 
         Console.Write("\nWhat is a short description of your goal? ");
@@ -51,6 +53,9 @@ public class EternalGoal : Goal
 
     public override EternalGoal DisplayGoalEditor()
     {
+        Console.Clear();
+        Console.WriteLine("EDIT ETERNAL GOAL");
+        
         EternalGoal newEternalGoal = new EternalGoal();
         
         Console.Write($"\nPlease enter the new Goal name, or hit enter to use the existing value: ({GetTitle()}): ");

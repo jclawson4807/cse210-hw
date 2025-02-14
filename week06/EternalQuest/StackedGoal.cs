@@ -63,7 +63,9 @@ public class StackedGoal : Goal
     public override StackedGoal DisplayCreateGoalMenu()
     {
         Console.Clear();
-        Console.Write("What is the name of your goal? ");
+        Console.WriteLine("CREATE STACKED GOAL");
+        
+        Console.Write("\nWhat is the name of your goal? ");
         string title = Console.ReadLine();
 
         Console.Write("\nWhat is a short description of your goal? ");
@@ -93,6 +95,10 @@ public class StackedGoal : Goal
 
     public override StackedGoal DisplayGoalEditor()
     {
+        Console.Clear();
+        
+        Console.WriteLine("EDIT STACKED GOAL");
+        
         StackedGoal newStackedGoal = new StackedGoal();
         
         Console.Write($"\nPlease enter the new Goal name, or hit enter to use the existing value: ({GetTitle()}): ");
