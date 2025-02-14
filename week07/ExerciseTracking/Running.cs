@@ -4,6 +4,12 @@ public class Running : Activity
 {
     private double _distanceInMiles;
 
+    public Running(DateTime activityDate, int activityDurationInMinutes, double distanceInMiles) : base(activityDate: activityDate, activityDurationInMinutes: activityDurationInMinutes)
+    {
+        _distanceInMiles = distanceInMiles;
+        SetActivityName("Running");
+    }
+
     public override double GetDistance()
     {
         return _distanceInMiles;   
