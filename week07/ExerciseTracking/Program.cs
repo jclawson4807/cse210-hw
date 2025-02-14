@@ -12,7 +12,7 @@ class Program
         Running running = new Running(DateTime.Now, 60, 6);
         _activities.Add(running);
 
-        Swimming swimming = new Swimming(DateTime.Now, 30, 15);
+        Swimming swimming = new Swimming(DateTime.Now, 47, 33);
         _activities.Add(swimming);
     }
 

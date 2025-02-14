@@ -18,17 +18,21 @@ public class Swimming : Activity
 
     public override double GetDistance()
     {
-        return _numberOfLaps * 50 / 1000 * 0.62;   
+        double distance = GetNumberOfLaps() * 50;
+        distance = distance/1000;
+        distance = distance * 0.62;
+        
+        return Math.Round(distance, 2); 
     }
 
     public override double GetSpeed()
     {
-        return (GetDistance() / GetActivityDuration()) * 60;
+        return Math.Round(((GetDistance() / GetActivityDuration()) * 60), 2);
     }
 
     public override double GetPace()
     {
         // WON'T THIS BE THE SAME IN ALL CLASSES?  WHY CAN'T THIS BE IN THE BASE CLASS?
-        return GetActivityDuration() / GetDistance();
+        return Math.Round((GetActivityDuration() / GetDistance()), 2);
     }
 }

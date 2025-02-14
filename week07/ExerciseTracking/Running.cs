@@ -15,17 +15,17 @@ public class Running : Activity
 
     public override double GetDistance()
     {
-        return _distanceInMiles;   
+        return Math.Round(_distanceInMiles, 2);   
     }
 
     public override double GetSpeed()
     {
-        return (GetDistance() / GetActivityDuration()) * 60;
+        return Math.Round(((GetDistance() / GetActivityDuration()) * 60), 2);
     }
 
     public override double GetPace()
     {
         // WON'T THIS BE THE SAME IN ALL CLASSES?  WHY CAN'T THIS BE IN THE BASE CLASS?
-        return GetActivityDuration() / GetDistance();
+        return Math.Round((GetActivityDuration() / GetDistance()), 2);
     }
 }
