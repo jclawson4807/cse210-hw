@@ -5,6 +5,12 @@ public class Swimming : Activity
     private int _numberOfLaps;
     private int _lapLengthInMeters = 50; //@TASK - is this needed?
 
+    public Swimming(DateTime activityDate, int activityDurationInMinutes, int numberOfLaps) : base(activityDate: activityDate, activityDurationInMinutes: activityDurationInMinutes)
+    {
+        _numberOfLaps = numberOfLaps;
+        SetActivityName("Swimming");
+    }
+
     public int GetNumberOfLaps()
     {
         return _numberOfLaps;
