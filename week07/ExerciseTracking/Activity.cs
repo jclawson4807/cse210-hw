@@ -1,9 +1,9 @@
 using System;
 
-public class Activity
+public abstract class Activity
 {
     private DateTime _activityDate;
-    private int _activityDuration;
+    private int _activityDurationInMinutes;
 
     public abstract double GetDistance();
 
@@ -18,12 +18,12 @@ public class Activity
 
     public int GetActivityDuration()
     {
-        return _activityDuration;
+        return _activityDurationInMinutes;
     }
 
     public string GetSummary()
     {
-        
+
     }
 
 }

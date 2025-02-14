@@ -3,7 +3,12 @@ using System;
 public class Swimming : Activity
 {
     private int _numberOfLaps;
-    private int _lapLengthInMeters = 50;
+    private int _lapLengthInMeters = 50; //@TASK - is this needed?
+
+    public int GetNumberOfLaps()
+    {
+        return _numberOfLaps;
+    }
 
     public override double GetDistance()
     {
@@ -17,6 +22,7 @@ public class Swimming : Activity
 
     public override double GetPace()
     {
+        // WON'T THIS BE THE SAME IN ALL CLASSES?  WHY CAN'T THIS BE IN THE BASE CLASS?
         return GetActivityDuration() / GetDistance();
     }
 }
