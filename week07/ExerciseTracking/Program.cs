@@ -6,13 +6,13 @@ class Program
 
     public static void PopulateActivities()
     {
-        Cycling cycling = new Cycling(DateTime.Now, 120, 25, 12.5);
+        Cycling cycling = new Cycling(activityDate: DateTime.Now, activityDurationInMinutes: 120, speedInMph: 12.5);
         _activities.Add(cycling);
 
-        Running running = new Running(DateTime.Now, 60, 6);
+        Running running = new Running(activityDate: DateTime.Now, activityDurationInMinutes: 60, distanceInMiles: 6);
         _activities.Add(running);
 
-        Swimming swimming = new Swimming(DateTime.Now, 47, 33);
+        Swimming swimming = new Swimming(activityDate: DateTime.Now, activityDurationInMinutes: 47, numberOfLaps: 33);
         _activities.Add(swimming);
     }
 
